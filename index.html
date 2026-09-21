@@ -519,7 +519,7 @@
           <p id="service-detail-tagline" class="text-base sm:text-lg text-brand font-bold"></p>
           <div id="service-detail-paragraphs" class="space-y-3 text-sm sm:text-base text-gray-700 leading-relaxed"></div>
           <div class="flex flex-wrap gap-4 pt-2">
-            <button type="button" onclick="navigateTo('home'); switchTab('book')" class="btn-futuristic btn-primary px-6 py-3.5 text-white rounded-xl font-bold text-sm">
+            <button type="button" onclick="bookThisService()" class="btn-futuristic btn-primary px-6 py-3.5 text-white rounded-xl font-bold text-sm">
               <i class="fa-solid fa-calendar-plus mr-2 text-xs"></i><span data-i18n="serviceDetail.bookBtn">Book This Service</span>
             </button>
             <button type="button" onclick="navigateTo('contact')" class="btn-futuristic btn-outline-glow px-6 py-3.5 bg-white/80 text-gray-700 border border-gray-200 rounded-xl font-bold text-sm hover:border-brand hover:text-brand">
@@ -1092,6 +1092,15 @@
       currentServiceId = id;
       renderServiceDetail();
       navigateTo('service-detail');
+    }
+
+    const serviceSelectValueMap = { ambulance: 'ambulance', ctscan: 'ct', endoscopy: 'endoscopy', laboratory: 'lab', mri: 'mri', radiography: 'radiography', ultrasound: 'ultrasound' };
+
+    function bookThisService() {
+      const selectValue = currentServiceId ? serviceSelectValueMap[currentServiceId] : '';
+      navigateTo('home');
+      switchTab('book');
+      if (selectValue) document.getElementById('service-type').value = selectValue;
     }
 
     function renderServiceDetail() {
