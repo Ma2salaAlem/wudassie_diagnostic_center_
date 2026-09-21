@@ -372,6 +372,14 @@
                 <input type="text" id="patient-name" placeholder="Abebe Bikila" required class="input-glow w-full px-4 py-3 rounded-lg border border-gray-200 bg-white/80 focus:border-brand text-sm outline-none">
               </div>
               <div>
+                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1" data-i18n="portal.phoneLabel">Phone Number</label>
+                <input type="tel" id="booking-phone" placeholder="+251 9... " required class="input-glow w-full px-4 py-3 rounded-lg border border-gray-200 bg-white/80 focus:border-brand text-sm outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1" data-i18n="portal.dateLabel">Preferred Appointment Date</label>
+                <input type="date" id="booking-date" required class="input-glow w-full px-4 py-3 rounded-lg border border-gray-200 bg-white/80 focus:border-brand text-sm outline-none">
+              </div>
+              <div>
                 <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1" data-i18n="portal.serviceLabel">Select Service</label>
                 <select id="service-type" required class="input-glow w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand text-sm outline-none bg-white/80">
                   <option value="" data-i18n="portal.serviceDefault">-- Choose Diagnostic Service --</option>
@@ -971,7 +979,7 @@
         topbar: { hotlineLabel: "24/7 Hotline & Emergency:", address: "MK Building, Churchill Road, Addis Ababa" },
         serviceShort: { ambulance: "Ambulance Services", ctscan: "CT-Scan", endoscopy: "Endoscopy & Colonoscopy", laboratory: "Laboratory", mri: "MRI Scanning", radiography: "Digital Radiography", ultrasound: "Ultrasonography (3D/4D)" },
         hero: { badge: "24/7 Service • Pagumen Free Examination Initiative", title1: "Wudassie Diagnostic Center", title2: "Uncompromising Image Quality", subtitle: "Working For You. Pioneering high-precision diagnostic imaging and laboratory services in Addis Ababa, Ethiopia since 2008.", btnServices: "View 7 Diagnostic Services", btnAbout: "Our Mission & History" },
-        portal: { tabPortal: "Patient Portal", tabBook: "Book Scan", sampleLabel: "Sample / Order ID", phoneLabel: "Phone Number", retrieveBtn: "Retrieve Test Results", nameLabel: "Full Name", serviceLabel: "Select Service", serviceDefault: "-- Choose Diagnostic Service --", bookBtn: "Request Appointment", searching: "Searching..." },
+        portal: { tabPortal: "Patient Portal", tabBook: "Book Scan", sampleLabel: "Sample / Order ID", phoneLabel: "Phone Number", retrieveBtn: "Retrieve Test Results", nameLabel: "Full Name", dateLabel: "Preferred Appointment Date", serviceLabel: "Select Service", serviceDefault: "-- Choose Diagnostic Service --", bookBtn: "Request Appointment", searching: "Searching..." },
         about: {
           badgeEstablished: "Established 2008 in Addis Ababa, Ethiopia", headerTitle: "About Wudassie Diagnostic Center", whoWeAreTitle: "Who We Are",
           p1: "Founded in 2008 by Dawit Hailu and his family, Wudassie Diagnostic Center (WDC) is one of the first diagnostic centers with MRI, CT scan, Digital X-ray, Ultrasound, EKG, and Ambulance service in Ethiopia.",
@@ -994,7 +1002,7 @@
           mapBadge: "Main Branch Location", mapTitle: "Visit Our Main Facility", mapSubtitle: "Conveniently situated in the center of Addis Ababa.", addressBlockLabel: "Address", hotlineBlockLabel: "24/7 Hotline & Emergency", hoursLabel: "Operating Hours", hoursValue: "24 Hours / 7 Days / 365 Days", openMaps: "Open in Google Maps"
         },
         footer: { copyright: "© 2026 Wudassie Diagnostic Center. All rights reserved.", tagline: "Working For You — Uncompromising Image Quality & Patient Care." },
-        alerts: { resultFound: "Result Found! PDF Ready for Download.", invalidId: "Invalid ID format. Must start with WUD-.", appointmentRequested: "Appointment requested for {name}! We will call you shortly.", messageSent: "Message sent successfully!" }
+        alerts: { resultFound: "Result Found! PDF Ready for Download.", invalidId: "Invalid ID format. Must start with WUD-.", appointmentRequested: "Appointment requested for {name} on {date}! We will call {phone} shortly to confirm.", messageSent: "Message sent successfully!" }
       },
       am: {
         nav: { home: "መነሻ", about: "ስለ እኛ", services: "አገልግሎቶች", gallery: "ማዕከለ-ስዕላት", testimonials: "የደንበኞች አስተያየት", contact: "አግኙን", getInTouch: "ያግኙን" },
@@ -1002,7 +1010,7 @@
         topbar: { hotlineLabel: "24/7 የስልክ መስመር እና ድንገተኛ አደጋ፡", address: "ኤም.ኬ ህንፃ፣ ቸርችል ጎዳና፣ አዲስ አበባ" },
         serviceShort: { ambulance: "የአምቡላንስ አገልግሎት", ctscan: "ሲቲ ስካን", endoscopy: "ኢንዶስኮፒ እና ኮሎኖስኮፒ", laboratory: "ላቦራቶሪ", mri: "ኤምአርአይ", radiography: "ራዲዮግራፊ (ዲጂታል ኤክስሬይ)", ultrasound: "አልትራሳውንድ (3ል/4ል)" },
         hero: { badge: "24/7 አገልግሎት • የጳጉሜ ነጻ ምርመራ ውጥን", title1: "ውዳሴ የምርመራ ማዕከል", title2: "ያልተደራደረ የምስል ጥራት", subtitle: "ለእርስዎ እንሰራለን። ከ2008 ጀምሮ በአዲስ አበባ፣ ኢትዮጵያ ከፍተኛ ትክክለኛነት ያለው የምስል ምርመራ እና የላቦራቶሪ አገልግሎት በማቅረብ ቀዳሚ ነን።", btnServices: "7ቱን የምርመራ አገልግሎቶች ይመልከቱ", btnAbout: "ተልእኳችን እና ታሪካችን" },
-        portal: { tabPortal: "የታካሚ መግቢያ", tabBook: "ቀጠሮ ይያዙ", sampleLabel: "የናሙና / የትዕዛዝ መለያ", phoneLabel: "ስልክ ቁጥር", retrieveBtn: "የምርመራ ውጤት ያግኙ", nameLabel: "ሙሉ ስም", serviceLabel: "አገልግሎት ይምረጡ", serviceDefault: "-- የምርመራ አገልግሎት ይምረጡ --", bookBtn: "ቀጠሮ ይጠይቁ", searching: "በመፈለግ ላይ..." },
+        portal: { tabPortal: "የታካሚ መግቢያ", tabBook: "ቀጠሮ ይያዙ", sampleLabel: "የናሙና / የትዕዛዝ መለያ", phoneLabel: "ስልክ ቁጥር", retrieveBtn: "የምርመራ ውጤት ያግኙ", nameLabel: "ሙሉ ስም", dateLabel: "የሚፈለገው የቀጠሮ ቀን", serviceLabel: "አገልግሎት ይምረጡ", serviceDefault: "-- የምርመራ አገልግሎት ይምረጡ --", bookBtn: "ቀጠሮ ይጠይቁ", searching: "በመፈለግ ላይ..." },
         about: {
           badgeEstablished: "በ2008 ዓ.ም በአዲስ አበባ፣ ኢትዮጵያ ተመሠረተ", headerTitle: "ስለ ውዳሴ የምርመራ ማዕከል", whoWeAreTitle: "እኛ ማን ነን",
           p1: "በ2008 ዓ.ም በዳዊት ኃይሉ እና በቤተሰቡ የተመሰረተው ውዳሴ የምርመራ ማዕከል (WDC)፣ በኢትዮጵያ ኤምአርአይ፣ ሲቲ ስካን፣ ዲጂታል ኤክስሬይ፣ አልትራሳውንድ፣ ኢኬጂ እና የአምቡላንስ አገልግሎት ካላቸው የመጀመሪያዎቹ የምርመራ ማዕከላት አንዱ ነው።",
@@ -1025,7 +1033,7 @@
           mapBadge: "የዋና ቅርንጫፍ አድራሻ", mapTitle: "ዋና ተቋማችንን ይጎብኙ", mapSubtitle: "በአዲስ አበባ መሃል በምቹ ሁኔታ ይገኛል።", addressBlockLabel: "አድራሻ", hotlineBlockLabel: "24/7 ስልክ መስመር እና ድንገተኛ አደጋ", hoursLabel: "የስራ ሰዓታት", hoursValue: "24 ሰዓት / 7 ቀን / 365 ቀን", openMaps: "በጉግል ካርታ ይክፈቱ"
         },
         footer: { copyright: "© 2026 ውዳሴ የምርመራ ማዕከል። መብቱ በህግ የተጠበቀ ነው።", tagline: "ለእርስዎ እንሰራለን — ያልተደራደረ የምስል ጥራት እና የታካሚ እንክብካቤ።" },
-        alerts: { resultFound: "ውጤት ተገኝቷል! ፒዲኤፍ ለማውረድ ዝግጁ ነው።", invalidId: "ልክ ያልሆነ መለያ ቅርጸት። በ WUD- መጀመር አለበት።", appointmentRequested: "ለ{name} ቀጠሮ ተጠይቋል! በቅርቡ እንደውልልዎታለን።", messageSent: "መልእክት በተሳካ ሁኔታ ተልኳል!" }
+        alerts: { resultFound: "ውጤት ተገኝቷል! ፒዲኤፍ ለማውረድ ዝግጁ ነው።", invalidId: "ልክ ያልሆነ መለያ ቅርጸት። በ WUD- መጀመር አለበት።", appointmentRequested: "ለ{name} በ{date} ቀጠሮ ተጠይቋል! {phone} ላይ በቅርቡ ደውለን እናረጋግጣለን።", messageSent: "መልእክት በተሳካ ሁኔታ ተልኳል!" }
       }
     };
   </script>
@@ -1217,11 +1225,17 @@
     function handleBooking(e) {
       e.preventDefault();
       const name = document.getElementById('patient-name').value;
+      const phone = document.getElementById('booking-phone').value;
+      const dateValue = document.getElementById('booking-date').value;
       const alertBox = document.getElementById('status-alert');
+
+      const dateObj = new Date(dateValue + 'T00:00:00');
+      const formattedDate = isNaN(dateObj) ? dateValue : dateObj.toLocaleDateString(currentLang === 'am' ? 'am-ET' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
       alertBox.classList.remove('hidden', 'bg-red-50', 'text-red-700');
       alertBox.classList.add('bg-green-50', 'text-green-700');
-      alertBox.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> ' + translations[currentLang].alerts.appointmentRequested.replace('{name}', name);
+      alertBox.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> ' + translations[currentLang].alerts.appointmentRequested
+        .replace('{name}', name).replace('{date}', formattedDate).replace('{phone}', phone);
       document.getElementById('book-form').reset();
     }
 
@@ -1276,6 +1290,8 @@
     document.addEventListener('DOMContentLoaded', () => {
       applyLanguage('en');
       initReveal();
+      const todayStr = new Date().toISOString().split('T')[0];
+      document.getElementById('booking-date').min = todayStr;
     });
   </script>
 </body>
