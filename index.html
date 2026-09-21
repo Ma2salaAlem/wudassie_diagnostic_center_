@@ -1002,7 +1002,7 @@
           mapBadge: "Main Branch Location", mapTitle: "Visit Our Main Facility", mapSubtitle: "Conveniently situated in the center of Addis Ababa.", addressBlockLabel: "Address", hotlineBlockLabel: "24/7 Hotline & Emergency", hoursLabel: "Operating Hours", hoursValue: "24 Hours / 7 Days / 365 Days", openMaps: "Open in Google Maps"
         },
         footer: { copyright: "© 2026 Wudassie Diagnostic Center. All rights reserved.", tagline: "Working For You — Uncompromising Image Quality & Patient Care." },
-        alerts: { resultFound: "Result Found! PDF Ready for Download.", invalidId: "Invalid ID format. Must start with WUD-.", appointmentRequested: "Appointment requested for {name} on {date}! We will call {phone} shortly to confirm.", messageSent: "Message sent successfully!" }
+        alerts: { resultFound: "Result Found! PDF Ready for Download.", invalidId: "Invalid ID format. Must start with WUD-.", appointmentRequested: "Appointment requested for {name} on {date}! We will call {phone} shortly to confirm.", messageSent: "Message sent successfully!", bookingFailed: "Something went wrong sending your request. Please call us directly at +251 940 101010." }
       },
       am: {
         nav: { home: "መነሻ", about: "ስለ እኛ", services: "አገልግሎቶች", gallery: "ማዕከለ-ስዕላት", testimonials: "የደንበኞች አስተያየት", contact: "አግኙን", getInTouch: "ያግኙን" },
@@ -1033,7 +1033,7 @@
           mapBadge: "የዋና ቅርንጫፍ አድራሻ", mapTitle: "ዋና ተቋማችንን ይጎብኙ", mapSubtitle: "በአዲስ አበባ መሃል በምቹ ሁኔታ ይገኛል።", addressBlockLabel: "አድራሻ", hotlineBlockLabel: "24/7 ስልክ መስመር እና ድንገተኛ አደጋ", hoursLabel: "የስራ ሰዓታት", hoursValue: "24 ሰዓት / 7 ቀን / 365 ቀን", openMaps: "በጉግል ካርታ ይክፈቱ"
         },
         footer: { copyright: "© 2026 ውዳሴ የምርመራ ማዕከል። መብቱ በህግ የተጠበቀ ነው።", tagline: "ለእርስዎ እንሰራለን — ያልተደራደረ የምስል ጥራት እና የታካሚ እንክብካቤ።" },
-        alerts: { resultFound: "ውጤት ተገኝቷል! ፒዲኤፍ ለማውረድ ዝግጁ ነው።", invalidId: "ልክ ያልሆነ መለያ ቅርጸት። በ WUD- መጀመር አለበት።", appointmentRequested: "ለ{name} በ{date} ቀጠሮ ተጠይቋል! {phone} ላይ በቅርቡ ደውለን እናረጋግጣለን።", messageSent: "መልእክት በተሳካ ሁኔታ ተልኳል!" }
+        alerts: { resultFound: "ውጤት ተገኝቷል! ፒዲኤፍ ለማውረድ ዝግጁ ነው።", invalidId: "ልክ ያልሆነ መለያ ቅርጸት። በ WUD- መጀመር አለበት።", appointmentRequested: "ለ{name} በ{date} ቀጠሮ ተጠይቋል! {phone} ላይ በቅርቡ ደውለን እናረጋግጣለን።", messageSent: "መልእክት በተሳካ ሁኔታ ተልኳል!", bookingFailed: "ጥያቄዎን በመላክ ላይ ችግር ተፈጥሯል። እባክዎ በቀጥታ በ+251 940 101010 ይደውሉልን።" }
       }
     };
   </script>
@@ -1222,21 +1222,51 @@
       }, 1000);
     }
 
-    function handleBooking(e) {
+    async function handleBooking(e) {
       e.preventDefault();
       const name = document.getElementById('patient-name').value;
       const phone = document.getElementById('booking-phone').value;
       const dateValue = document.getElementById('booking-date').value;
+      const serviceSelect = document.getElementById('service-type');
+      const serviceLabel = serviceSelect.options[serviceSelect.selectedIndex].text;
       const alertBox = document.getElementById('status-alert');
+      const btn = document.getElementById('book-btn');
 
       const dateObj = new Date(dateValue + 'T00:00:00');
       const formattedDate = isNaN(dateObj) ? dateValue : dateObj.toLocaleDateString(currentLang === 'am' ? 'am-ET' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-      alertBox.classList.remove('hidden', 'bg-red-50', 'text-red-700');
-      alertBox.classList.add('bg-green-50', 'text-green-700');
-      alertBox.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> ' + translations[currentLang].alerts.appointmentRequested
-        .replace('{name}', name).replace('{date}', formattedDate).replace('{phone}', phone);
-      document.getElementById('book-form').reset();
+      const originalBtnHTML = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-2 text-xs"></i> ' + translations[currentLang].portal.searching;
+
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/matusalaalem54@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: 'New Appointment Request - Wudassie Diagnostic Center',
+            _template: 'table',
+            'Patient Name': name,
+            'Phone Number': phone,
+            'Preferred Date': formattedDate,
+            'Service Requested': serviceLabel
+          })
+        });
+        if (!response.ok) throw new Error('Request failed');
+
+        alertBox.classList.remove('hidden', 'bg-red-50', 'text-red-700');
+        alertBox.classList.add('bg-green-50', 'text-green-700');
+        alertBox.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> ' + translations[currentLang].alerts.appointmentRequested
+          .replace('{name}', name).replace('{date}', formattedDate).replace('{phone}', phone);
+        document.getElementById('book-form').reset();
+      } catch (err) {
+        alertBox.classList.remove('hidden', 'bg-green-50', 'text-green-700');
+        alertBox.classList.add('bg-red-50', 'text-red-700');
+        alertBox.innerHTML = '<i class="fa-solid fa-circle-exclamation mr-1"></i> ' + translations[currentLang].alerts.bookingFailed;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalBtnHTML;
+      }
     }
 
     function handleContact(e) {
