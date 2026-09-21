@@ -9,15 +9,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Ethiopic:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Space Grotesk', 'sans-serif'],
+            sans: ['Inter', 'Noto Sans Ethiopic', 'sans-serif'],
+            display: ['Space Grotesk', 'Noto Sans Ethiopic', 'sans-serif'],
           },
           colors: {
             brand: {
@@ -42,26 +42,16 @@
     }
 
     * { -webkit-tap-highlight-color: transparent; }
-
     html { scroll-behavior: smooth; }
-
     body {
       background-color: #fafafa;
-      background-image:
-        radial-gradient(circle at 1px 1px, rgba(211,47,47,0.06) 1px, transparent 0);
+      background-image: radial-gradient(circle at 1px 1px, rgba(211,47,47,0.06) 1px, transparent 0);
       background-size: 28px 28px;
     }
-
     ::selection { background: var(--brand); color: #fff; }
-
-    /* Scrollbar */
     ::-webkit-scrollbar { width: 10px; height: 10px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, var(--brand-light), var(--brand));
-      border-radius: 999px;
-      border: 2px solid #fafafa;
-    }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--brand-light), var(--brand)); border-radius: 999px; border: 2px solid #fafafa; }
     ::-webkit-scrollbar-thumb:hover { background: var(--brand-dark); }
 
     /* ============ GLASS SYSTEM ============ */
@@ -71,10 +61,7 @@
       -webkit-backdrop-filter: blur(18px) saturate(180%);
       transition: all 0.4s cubic-bezier(.2,.8,.2,1);
     }
-    .glass-nav.scrolled {
-      background: rgba(255, 255, 255, 0.88);
-      box-shadow: 0 10px 40px -10px rgba(154, 0, 7, 0.15);
-    }
+    .glass-nav.scrolled { background: rgba(255, 255, 255, 0.88); box-shadow: 0 10px 40px -10px rgba(154, 0, 7, 0.15); }
 
     .liquid-glass {
       position: relative;
@@ -83,263 +70,155 @@
       backdrop-filter: blur(24px) saturate(200%);
       -webkit-backdrop-filter: blur(24px) saturate(200%);
       border: 1px solid var(--glass-border);
-      box-shadow:
-        0 20px 60px -15px rgba(31, 38, 135, 0.15),
-        inset 0 1px 1px rgba(255, 255, 255, 0.8);
+      box-shadow: 0 20px 60px -15px rgba(31, 38, 135, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.8);
     }
     .liquid-glass::before {
       content: '';
-      position: absolute;
-      top: -60%;
-      left: -80%;
-      width: 55%;
-      height: 260%;
+      position: absolute; top: -60%; left: -80%;
+      width: 55%; height: 260%;
       background: linear-gradient(120deg, transparent, rgba(255,255,255,0.65), transparent);
       transform: rotate(18deg);
       transition: left 1.1s cubic-bezier(.2,.8,.2,1);
-      pointer-events: none;
-      z-index: 1;
+      pointer-events: none; z-index: 1;
     }
     .liquid-glass:hover::before { left: 140%; }
 
-    .glass-dark {
-      background: linear-gradient(135deg, rgba(20,20,25,0.75), rgba(20,20,25,0.55));
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
-      border: 1px solid rgba(255,255,255,0.12);
+    /* ============ NAV LIQUID-GLASS PILLS ============ */
+    .nav-pill {
+      position: relative;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      transition: all 0.35s cubic-bezier(.2,.8,.2,1);
+    }
+    .nav-pill:hover {
+      background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.45));
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      box-shadow: 0 4px 18px -6px rgba(211,47,47,0.25), inset 0 1px 1px rgba(255,255,255,0.7);
+      transform: translateY(-1px);
+    }
+    .nav-pill.active {
+      background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,255,255,0.6));
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      box-shadow: 0 4px 18px -6px rgba(211,47,47,0.32), inset 0 1px 1px rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.65);
     }
 
     /* ============ ANIMATED GRADIENT BORDER (glow-card) ============ */
-    .glow-card {
-      position: relative;
-      z-index: 0;
-      isolation: isolate;
-      transition: transform 0.45s cubic-bezier(.2,.8,.2,1), box-shadow 0.45s;
-    }
+    .glow-card { position: relative; z-index: 0; isolation: isolate; transition: transform 0.45s cubic-bezier(.2,.8,.2,1), box-shadow 0.45s; }
     .glow-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1.5px;
+      content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px;
       background: linear-gradient(120deg, var(--brand-light), transparent 40%, transparent 60%, var(--brand));
       background-size: 220% 220%;
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      animation: borderFlow 5s linear infinite;
-      pointer-events: none;
-      z-index: 2;
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      opacity: 0; transition: opacity 0.4s ease; animation: borderFlow 5s linear infinite;
+      pointer-events: none; z-index: 2;
     }
-    .glow-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 45px -18px rgba(211, 47, 47, 0.35);
-    }
+    .glow-card:hover { transform: translateY(-6px); box-shadow: 0 24px 45px -18px rgba(211, 47, 47, 0.35); }
     .glow-card:hover::before { opacity: 1; }
-
-    @keyframes borderFlow {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 220% 50%; }
-    }
+    @keyframes borderFlow { 0% { background-position: 0% 50%; } 100% { background-position: 220% 50%; } }
 
     /* ============ FUTURISTIC BUTTONS ============ */
-    .btn-futuristic {
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-      transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s ease;
-      will-change: transform;
-    }
+    .btn-futuristic { position: relative; overflow: hidden; isolation: isolate; transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s ease; will-change: transform; }
     .btn-futuristic::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -120%;
-      width: 60%; height: 100%;
+      content: ''; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
       background: linear-gradient(120deg, transparent, rgba(255,255,255,0.55), transparent);
-      transform: skewX(-20deg);
-      transition: left 0.65s ease;
-      z-index: 1;
-      pointer-events: none;
+      transform: skewX(-20deg); transition: left 0.65s ease; z-index: 1; pointer-events: none;
     }
     .btn-futuristic:hover::before { left: 130%; }
     .btn-futuristic:hover { transform: translateY(-2px); }
     .btn-futuristic:active { transform: translateY(0) scale(0.96); }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--brand-light), var(--brand) 55%, var(--brand-dark));
-      box-shadow: 0 6px 24px -4px var(--brand-glow), inset 0 1px 0 rgba(255,255,255,0.35);
-    }
+    .btn-primary { background: linear-gradient(135deg, var(--brand-light), var(--brand) 55%, var(--brand-dark)); box-shadow: 0 6px 24px -4px var(--brand-glow), inset 0 1px 0 rgba(255,255,255,0.35); }
     .btn-primary:hover { box-shadow: 0 14px 34px -6px var(--brand-glow), inset 0 1px 0 rgba(255,255,255,0.4); }
+    .btn-outline-glow { transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s ease, border-color 0.35s ease; }
+    .btn-outline-glow:hover { transform: translateY(-2px); box-shadow: 0 10px 28px -8px rgba(211,47,47,0.3); }
 
-    .btn-outline-glow {
-      transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s ease, border-color 0.35s ease;
-    }
-    .btn-outline-glow:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px -8px rgba(211,47,47,0.3);
-    }
-
-    .ripple {
-      position: absolute;
-      border-radius: 50%;
-      transform: scale(0);
-      animation: rippleAnim 0.7s ease-out;
-      background: rgba(255,255,255,0.55);
-      pointer-events: none;
-      z-index: 2;
-    }
-    @keyframes rippleAnim {
-      to { transform: scale(3.2); opacity: 0; }
-    }
+    .ripple { position: absolute; border-radius: 50%; transform: scale(0); animation: rippleAnim 0.7s ease-out; background: rgba(255,255,255,0.55); pointer-events: none; z-index: 2; }
+    @keyframes rippleAnim { to { transform: scale(3.2); opacity: 0; } }
 
     /* ============ AURORA / BLOB BACKGROUND ============ */
     .aurora-wrap { position: absolute; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.55;
-      animation: drift 16s ease-in-out infinite;
-    }
+    .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.55; animation: drift 16s ease-in-out infinite; }
     .blob-1 { width: 420px; height: 420px; background: radial-gradient(circle, var(--brand-light), transparent 70%); top: -120px; right: -80px; animation-duration: 18s; }
     .blob-2 { width: 340px; height: 340px; background: radial-gradient(circle, var(--brand), transparent 70%); bottom: -100px; left: -60px; opacity: 0.25; animation-duration: 22s; animation-delay: -6s; }
     .blob-3 { width: 260px; height: 260px; background: radial-gradient(circle, #ff9a8b, transparent 70%); top: 30%; left: 40%; opacity: 0.18; animation-duration: 14s; animation-delay: -3s; }
-
-    @keyframes drift {
-      0%, 100% { transform: translate(0,0) scale(1); }
-      33% { transform: translate(30px, -25px) scale(1.08); }
-      66% { transform: translate(-20px, 20px) scale(0.95); }
-    }
+    @keyframes drift { 0%, 100% { transform: translate(0,0) scale(1); } 33% { transform: translate(30px, -25px) scale(1.08); } 66% { transform: translate(-20px, 20px) scale(0.95); } }
 
     /* ============ SCROLL REVEAL ============ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.7s cubic-bezier(.2,.8,.2,1), transform 0.7s cubic-bezier(.2,.8,.2,1);
-    }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(.2,.8,.2,1), transform 0.7s cubic-bezier(.2,.8,.2,1); }
     .reveal.in-view { opacity: 1; transform: translateY(0); }
 
     /* ============ PAGE TRANSITION ============ */
     .page-view { animation: pageIn 0.55s cubic-bezier(.2,.8,.2,1); }
-    @keyframes pageIn {
-      from { opacity: 0; transform: translateY(14px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes pageIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
     /* ============ HUD FRAME CORNERS ============ */
     .hud-frame { position: relative; }
-    .hud-frame::before,
-    .hud-frame::after,
-    .hud-frame .corner-br,
-    .hud-frame .corner-bl { display: none; }
-    .hud-corner {
-      position: absolute;
-      width: 22px; height: 22px;
-      border-color: var(--brand);
-      opacity: 0.85;
-      z-index: 10;
-      pointer-events: none;
-    }
+    .hud-corner { position: absolute; width: 22px; height: 22px; border-color: var(--brand); opacity: 0.85; z-index: 10; pointer-events: none; }
     .hud-corner.tl { top: -2px; left: -2px; border-top: 3px solid; border-left: 3px solid; border-top-left-radius: 10px; }
     .hud-corner.tr { top: -2px; right: -2px; border-top: 3px solid; border-right: 3px solid; border-top-right-radius: 10px; }
     .hud-corner.bl { bottom: -2px; left: -2px; border-bottom: 3px solid; border-left: 3px solid; border-bottom-left-radius: 10px; }
     .hud-corner.br { bottom: -2px; right: -2px; border-bottom: 3px solid; border-right: 3px solid; border-bottom-right-radius: 10px; }
 
     /* ============ LOGO MARK ============ */
-    .logo-ring {
-      position: relative;
-    }
+    .logo-ring { position: relative; }
     .logo-ring::before {
-      content: '';
-      position: absolute;
-      inset: -5px;
-      border-radius: 14px;
+      content: ''; position: absolute; inset: -5px; border-radius: 14px;
       background: conic-gradient(from 0deg, var(--brand-light), var(--brand), var(--brand-dark), var(--brand-light));
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      animation: spin 4s linear infinite;
-      z-index: -1;
+      opacity: 0; transition: opacity 0.4s ease; animation: spin 4s linear infinite; z-index: -1;
     }
     .group:hover .logo-ring::before { opacity: 0.55; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ============ NAV LINK UNDERLINE ============ */
-    .nav-link { position: relative; padding-bottom: 4px; }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      left: 0; bottom: -2px;
-      width: 0; height: 2px;
-      background: linear-gradient(90deg, var(--brand-light), var(--brand));
-      transition: width 0.35s cubic-bezier(.2,.8,.2,1);
-      border-radius: 2px;
-    }
-    .nav-link:hover::after,
-    .nav-link.text-brand::after { width: 100%; }
-
     /* ============ FLOATING INPUTS ============ */
-    .input-glow {
-      transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
-    }
-    .input-glow:focus {
-      box-shadow: 0 0 0 4px rgba(211,47,47,0.12), 0 8px 20px -6px rgba(211,47,47,0.25);
-      transform: translateY(-1px);
-    }
+    .input-glow { transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease; }
+    .input-glow:focus { box-shadow: 0 0 0 4px rgba(211,47,47,0.12), 0 8px 20px -6px rgba(211,47,47,0.25); transform: translateY(-1px); }
 
     /* ============ MOBILE MENU SLIDE ============ */
     #mobile-menu.menu-open { animation: slideDown 0.4s cubic-bezier(.2,.8,.2,1); }
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
 
     /* ============ STATUS PULSE DOT ============ */
     .pulse-dot { position: relative; }
-    .pulse-dot::after {
-      content: '';
-      position: absolute; inset: 0;
-      border-radius: 50%;
-      background: inherit;
-      animation: pulseRing 1.8s cubic-bezier(0,0,.2,1) infinite;
-    }
-    @keyframes pulseRing {
-      0% { transform: scale(1); opacity: 0.7; }
-      100% { transform: scale(2.6); opacity: 0; }
-    }
+    .pulse-dot::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: inherit; animation: pulseRing 1.8s cubic-bezier(0,0,.2,1) infinite; }
+    @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(2.6); opacity: 0; } }
 
     /* ============ GALLERY ZOOM ============ */
     .gallery-tile { transition: transform 0.6s cubic-bezier(.2,.8,.2,1); }
     .gallery-frame:hover .gallery-tile { transform: scale(1.08); }
 
-    /* ============ FLOAT ANIMATION (portal card) ============ */
-    @keyframes floatY {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
+    @keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
     .float-slow { animation: floatY 6s ease-in-out infinite; }
 
-    /* ============ GRADIENT TEXT ============ */
     .text-gradient-brand {
       background: linear-gradient(90deg, var(--brand-dark), var(--brand), var(--brand-light));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      background-size: 200% auto;
-      animation: gradientShift 6s ease infinite;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      background-size: 200% auto; animation: gradientShift 6s ease infinite;
     }
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% center; }
-      50% { background-position: 100% center; }
+    @keyframes gradientShift { 0%, 100% { background-position: 0% center; } 50% { background-position: 100% center; } }
+
+    /* ============ SERVICE HERO ORB ============ */
+    .service-orb { position: relative; width: 240px; height: 240px; display: flex; align-items: center; justify-content: center; }
+    .orb-ring { position: absolute; border-radius: 50%; border: 1.5px dashed rgba(211,47,47,0.35); }
+    .orb-ring.ring-1 { inset: 0; animation: spin 18s linear infinite; }
+    .orb-ring.ring-2 { inset: 22px; border-style: solid; border-color: rgba(211,47,47,0.15); animation: spin 12s linear infinite reverse; }
+    .orb-core {
+      position: relative; width: 158px; height: 158px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; color: var(--brand);
+      box-shadow: 0 25px 60px -15px rgba(211,47,47,0.35), inset 0 1px 1px rgba(255,255,255,0.8);
+    }
+    .orb-core::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.9), transparent 55%);
+      pointer-events: none;
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
   </style>
 </head>
@@ -347,16 +226,15 @@
 
   <!-- TOP EMERGENCY BAR & HEADER NAVIGATION -->
   <header class="sticky top-0 z-50">
-    <!-- Top Bar -->
     <div class="bg-gradient-to-r from-brand-dark via-brand to-brand-dark text-white text-xs py-2.5 px-4 sm:px-6 bg-[length:200%_auto] animate-[gradientShift_8s_ease_infinite]">
       <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
         <div class="flex flex-wrap items-center space-x-4 sm:space-x-6">
           <a href="tel:+251940101010" class="hover:text-red-200 transition-colors flex items-center gap-1.5 font-bold">
             <i class="fa-solid fa-phone"></i>
-            <span>24/7 Hotline & Emergency: <strong class="underline decoration-red-300 decoration-2 font-black">+251 940 101010</strong></span>
+            <span><span data-i18n="topbar.hotlineLabel">24/7 Hotline & Emergency:</span> <strong class="underline decoration-red-300 decoration-2 font-black">+251 940 101010</strong></span>
           </a>
           <span class="hidden md:flex items-center gap-1 font-bold text-gray-100">
-            <i class="fa-solid fa-location-dot text-brand-light"></i> MK Building, Churchill Road, Addis Ababa
+            <i class="fa-solid fa-location-dot text-brand-light"></i> <span data-i18n="topbar.address">MK Building, Churchill Road, Addis Ababa</span>
           </span>
         </div>
         <div class="flex items-center space-x-3 text-xs">
@@ -367,53 +245,46 @@
       </div>
     </div>
 
-    <!-- Main Navigation Header -->
     <nav id="main-nav" class="glass-nav border-b border-white/40 shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
 
-        <!-- Brand Logo -->
         <a href="javascript:void(0)" onclick="navigateTo('home')" class="flex items-center space-x-3 group">
-          <div class="logo-ring w-10 h-10 bg-gradient-to-br from-brand-light via-brand to-brand-dark rounded-xl flex items-center justify-center text-white font-black text-xl shadow-md shadow-brand/30 group-hover:scale-105 transition-transform duration-300">
-            W
-          </div>
+          <div class="logo-ring w-10 h-10 bg-gradient-to-br from-brand-light via-brand to-brand-dark rounded-xl flex items-center justify-center text-white font-black text-xl shadow-md shadow-brand/30 group-hover:scale-105 transition-transform duration-300">W</div>
           <div>
             <span class="text-xl font-black tracking-tight text-gray-900 block leading-none font-display">WUDASSIE</span>
-            <span class="text-[10px] tracking-widest text-brand font-extrabold uppercase">Diagnostic Center</span>
+            <span class="text-[10px] tracking-widest text-brand font-extrabold uppercase" data-i18n="brand.tagline">Diagnostic Center</span>
           </div>
         </a>
 
-        <!-- Header Links -->
-        <div class="hidden lg:flex items-center space-x-7 text-sm font-extrabold">
-          <a id="nav-home" href="javascript:void(0)" onclick="navigateTo('home')" class="nav-link text-brand font-black transition-colors">Home</a>
-          <a id="nav-about" href="javascript:void(0)" onclick="navigateTo('about')" class="nav-link text-gray-700 hover:text-brand transition-colors">About Us</a>
+        <div class="hidden lg:flex items-center space-x-2 text-sm font-extrabold">
+          <a id="nav-home" href="javascript:void(0)" onclick="navigateTo('home')" class="nav-link nav-pill active text-brand font-black transition-colors" data-i18n="nav.home">Home</a>
+          <a id="nav-about" href="javascript:void(0)" onclick="navigateTo('about')" class="nav-link nav-pill text-gray-700 hover:text-brand transition-colors" data-i18n="nav.about">About Us</a>
 
-          <!-- Services Dropdown (7 Primary Services) -->
           <div class="relative group">
-            <button id="nav-services" onclick="navigateTo('services')" class="nav-link text-gray-700 hover:text-brand transition-colors flex items-center gap-1 py-2">
-              Services <i class="fa-solid fa-chevron-down text-[10px] text-gray-400 group-hover:text-brand transition-transform duration-300 group-hover:rotate-180"></i>
+            <button id="nav-services" onclick="navigateTo('services')" class="nav-link nav-pill text-gray-700 hover:text-brand transition-colors flex items-center gap-1">
+              <span data-i18n="nav.services">Services</span> <i class="fa-solid fa-chevron-down text-[10px] text-gray-400 group-hover:text-brand transition-transform duration-300 group-hover:rotate-180"></i>
             </button>
             <div class="absolute left-0 top-full pt-2 w-64 hidden group-hover:block z-50">
               <div class="liquid-glass rounded-2xl shadow-2xl py-2.5 text-xs font-bold text-gray-700 space-y-0.5">
-                <a href="javascript:void(0)" onclick="navigateTo('services'); scrollService('ambulance')" class="relative z-10 flex items-center px-4 py-2.5 hover:bg-white/70 hover:text-brand transition-colors rounded-lg mx-1"><i class="fa-solid fa-truck-medical w-6 text-brand"></i> Ambulance Services</a>
-                <a href="javascript:void(0)" onclick="navigateTo('services'); scrollService('ctscan')" class="relative z-10 flex items-center px-4 py-2.5 hover:bg-white/70 hover:text-brand transition-colors rounded-lg mx-1"><i class="fa-solid fa-circle-radiation w-6 text-brand"></i> CT-Scan</a>
-                <a href="javascript:void(0)" onclick="navigateTo('services'); scrollService('endoscopy')" class="relative z-10 flex items-center px-4 py-2.5 hover:bg-white/70 hover:text-brand transition-colors rounded-lg mx-1"><i class="fa-solid fa-stethoscope w-6 text-brand"></i> Endoscopy & Colonoscopy</a>
-                <a href="javascript:void(0)" onclick="navigateTo('services'); scrollService('laboratory')" class="relative z-10 flex items-center px-4 py-2.5 hover:bg-white/70 hover:text-brand transition-colors rounded-lg mx-1"><i class="fa-solid fa-vial w-6 text-brand"></i> Laboratory</a>
-                <a href="javascript:void(0)" onclick="navigateTo('services'); scrollService('mri')" class="relative z-10 flex items-center px-4 py-2.5 hover:bg-white/70 hover:text-brand transition-colors rounded-lg mx-1"><i class="fa-solid fa-magnet w-6 text-brand"></i> MRI Scanning</a>
-                <a href="javascript:void(0)" onclick="navigateTo('services'); scrollService('radiography')" class="relative z-10 flex items-center px-4 py-2.5 hover:bg-white/70 hover:text-brand transition-colors rounded-lg mx-1"><i class="fa-solid fa-x-ray w-6 text-brand"></i> Digital Radiography</a>
-                <a href="javascript:void(0)" onclick="navigateTo('services'); scrollService('ultrasound')" class="relative z-10 flex items-center px-4 py-2.5 hover:bg-white/70 hover:text-brand transition-colors rounded-lg mx-1"><i class="fa-solid fa-wave-square w-6 text-brand"></i> Ultrasonography (3D/4D)</a>
+                <a href="javascript:void(0)" onclick="openService('ambulance')" class="relative z-10 flex items-center px-4 py-2.5 hover:bg-white/70 hover:text-brand transition-colors rounded-lg mx-1"><i class="fa-solid fa-truck-medical w-6 text-brand"></i> <span data-i18n="serviceShort.ambulance">Ambulance Services</span></a>
+                <a href="javascript:void(0)" onclick="openService('ctscan')" class="relative z-10 flex items-center px-4 py-2.5 hover:bg-white/70 hover:text-brand transition-colors rounded-lg mx-1"><i class="fa-solid fa-circle-radiation w-6 text-brand"></i> <span data-i18n="serviceShort.ctscan">CT-Scan</span></a>
+                <a href="javascript:void(0)" onclick="openService('endoscopy')" class="relative z-10 flex items-center px-4 py-2.5 hover:bg-white/70 hover:text-brand transition-colors rounded-lg mx-1"><i class="fa-solid fa-stethoscope w-6 text-brand"></i> <span data-i18n="serviceShort.endoscopy">Endoscopy & Colonoscopy</span></a>
+                <a href="javascript:void(0)" onclick="openService('laboratory')" class="relative z-10 flex items-center px-4 py-2.5 hover:bg-white/70 hover:text-brand transition-colors rounded-lg mx-1"><i class="fa-solid fa-vial w-6 text-brand"></i> <span data-i18n="serviceShort.laboratory">Laboratory</span></a>
+                <a href="javascript:void(0)" onclick="openService('mri')" class="relative z-10 flex items-center px-4 py-2.5 hover:bg-white/70 hover:text-brand transition-colors rounded-lg mx-1"><i class="fa-solid fa-magnet w-6 text-brand"></i> <span data-i18n="serviceShort.mri">MRI Scanning</span></a>
+                <a href="javascript:void(0)" onclick="openService('radiography')" class="relative z-10 flex items-center px-4 py-2.5 hover:bg-white/70 hover:text-brand transition-colors rounded-lg mx-1"><i class="fa-solid fa-x-ray w-6 text-brand"></i> <span data-i18n="serviceShort.radiography">Digital Radiography</span></a>
+                <a href="javascript:void(0)" onclick="openService('ultrasound')" class="relative z-10 flex items-center px-4 py-2.5 hover:bg-white/70 hover:text-brand transition-colors rounded-lg mx-1"><i class="fa-solid fa-wave-square w-6 text-brand"></i> <span data-i18n="serviceShort.ultrasound">Ultrasonography (3D/4D)</span></a>
               </div>
             </div>
           </div>
 
-          <a id="nav-gallery" href="javascript:void(0)" onclick="navigateTo('gallery')" class="nav-link text-gray-700 hover:text-brand transition-colors">Gallery</a>
-          <a id="nav-testimonials" href="javascript:void(0)" onclick="navigateTo('testimonials')" class="nav-link text-gray-700 hover:text-brand transition-colors">Testimonials</a>
-          <a id="nav-contact" href="javascript:void(0)" onclick="navigateTo('contact')" class="nav-link text-gray-700 hover:text-brand transition-colors">Contact</a>
+          <a id="nav-gallery" href="javascript:void(0)" onclick="navigateTo('gallery')" class="nav-link nav-pill text-gray-700 hover:text-brand transition-colors" data-i18n="nav.gallery">Gallery</a>
+          <a id="nav-testimonials" href="javascript:void(0)" onclick="navigateTo('testimonials')" class="nav-link nav-pill text-gray-700 hover:text-brand transition-colors" data-i18n="nav.testimonials">Testimonials</a>
+          <a id="nav-contact" href="javascript:void(0)" onclick="navigateTo('contact')" class="nav-link nav-pill text-gray-700 hover:text-brand transition-colors" data-i18n="nav.contact">Contact</a>
         </div>
 
-        <!-- CTA & Mobile Trigger -->
         <div class="flex items-center gap-3">
           <a href="javascript:void(0)" onclick="navigateTo('contact')" class="btn-futuristic btn-primary hidden sm:inline-flex items-center px-5 py-2.5 text-white rounded-full text-xs font-black transition-all">
-            <i class="fa-solid fa-calendar-check mr-2"></i> Get In Touch
+            <i class="fa-solid fa-calendar-check mr-2"></i> <span data-i18n="nav.getInTouch">Get In Touch</span>
           </a>
           <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-gray-600 hover:bg-white/60 hover:text-brand transition-colors focus:outline-none">
             <i class="fa-solid fa-bars text-xl"></i>
@@ -421,14 +292,13 @@
         </div>
       </div>
 
-      <!-- Mobile Menu -->
       <div id="mobile-menu" class="hidden lg:hidden border-t border-white/40 liquid-glass px-4 pt-3 pb-6 space-y-2 text-sm font-extrabold">
-        <a href="javascript:void(0)" onclick="navigateTo('home'); toggleMobileMenu()" class="relative z-10 block px-3 py-2.5 rounded-lg text-brand hover:bg-white/60">Home</a>
-        <a href="javascript:void(0)" onclick="navigateTo('about'); toggleMobileMenu()" class="relative z-10 block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-white/60">About Us</a>
-        <a href="javascript:void(0)" onclick="navigateTo('services'); toggleMobileMenu()" class="relative z-10 block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-white/60">Our 7 Services</a>
-        <a href="javascript:void(0)" onclick="navigateTo('gallery'); toggleMobileMenu()" class="relative z-10 block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-white/60">Gallery</a>
-        <a href="javascript:void(0)" onclick="navigateTo('testimonials'); toggleMobileMenu()" class="relative z-10 block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-white/60">Testimonials</a>
-        <a href="javascript:void(0)" onclick="navigateTo('contact'); toggleMobileMenu()" class="relative z-10 block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-white/60">Contact Us</a>
+        <a href="javascript:void(0)" onclick="navigateTo('home'); toggleMobileMenu()" class="relative z-10 block px-3 py-2.5 rounded-lg text-brand hover:bg-white/60" data-i18n="nav.home">Home</a>
+        <a href="javascript:void(0)" onclick="navigateTo('about'); toggleMobileMenu()" class="relative z-10 block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-white/60" data-i18n="nav.about">About Us</a>
+        <a href="javascript:void(0)" onclick="navigateTo('services'); toggleMobileMenu()" class="relative z-10 block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-white/60" data-i18n="nav.services">Services</a>
+        <a href="javascript:void(0)" onclick="navigateTo('gallery'); toggleMobileMenu()" class="relative z-10 block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-white/60" data-i18n="nav.gallery">Gallery</a>
+        <a href="javascript:void(0)" onclick="navigateTo('testimonials'); toggleMobileMenu()" class="relative z-10 block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-white/60" data-i18n="nav.testimonials">Testimonials</a>
+        <a href="javascript:void(0)" onclick="navigateTo('contact'); toggleMobileMenu()" class="relative z-10 block px-3 py-2.5 rounded-lg text-gray-700 hover:bg-white/60" data-i18n="nav.contact">Contact</a>
       </div>
     </nav>
   </header>
@@ -444,41 +314,39 @@
 
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
 
-        <!-- Hero Intro -->
         <div class="lg:col-span-7 space-y-6">
           <div class="inline-flex items-center space-x-2 liquid-glass px-3.5 py-1.5 rounded-full text-xs font-bold text-brand">
             <span class="relative z-10 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-brand pulse-dot"></span>
-              24/7 Service • Pagumen Free Examination Initiative
+              <span data-i18n="hero.badge">24/7 Service • Pagumen Free Examination Initiative</span>
             </span>
           </div>
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 tracking-tight leading-tight font-display">
-            Wudassie Diagnostic Center<br>
-            <span class="text-gradient-brand">Uncompromising Image Quality</span>
+            <span data-i18n="hero.title1">Wudassie Diagnostic Center</span><br>
+            <span class="text-gradient-brand" data-i18n="hero.title2">Uncompromising Image Quality</span>
           </h1>
-          <p class="text-base sm:text-lg text-gray-600 max-w-2xl leading-relaxed">
+          <p class="text-base sm:text-lg text-gray-600 max-w-2xl leading-relaxed" data-i18n="hero.subtitle">
             Working For You. Pioneering high-precision diagnostic imaging and laboratory services in Addis Ababa, Ethiopia since 2008.
           </p>
 
           <div class="flex flex-wrap gap-4 pt-2">
             <button onclick="navigateTo('services')" class="btn-futuristic btn-primary px-6 py-3.5 text-white rounded-xl font-bold flex items-center text-sm">
-              View 7 Diagnostic Services <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+              <span data-i18n="hero.btnServices">View 7 Diagnostic Services</span> <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
             </button>
             <button onclick="navigateTo('about')" class="btn-futuristic btn-outline-glow px-6 py-3.5 bg-white/80 text-gray-700 border border-gray-200 rounded-xl font-bold hover:border-brand hover:text-brand flex items-center text-sm">
-              Our Mission & History
+              <span data-i18n="hero.btnAbout">Our Mission & History</span>
             </button>
           </div>
         </div>
 
-        <!-- Portal / Booking Interactive Card -->
         <div class="lg:col-span-5">
           <div class="liquid-glass float-slow p-6 sm:p-8 rounded-2xl space-y-6">
             <div class="relative z-10 flex border-b border-gray-200/70">
               <button id="tab-portal-btn" onclick="switchTab('portal')" class="flex-1 text-center font-bold text-brand border-b-2 border-brand pb-3 text-sm transition-all flex items-center justify-center gap-2">
-                <i class="fa-solid fa-file-waveform"></i> Patient Portal
+                <i class="fa-solid fa-file-waveform"></i> <span data-i18n="portal.tabPortal">Patient Portal</span>
               </button>
               <button id="tab-book-btn" onclick="switchTab('book')" class="flex-1 text-center font-bold text-gray-400 border-b-2 border-transparent pb-3 text-sm hover:text-gray-600 transition-all flex items-center justify-center gap-2">
-                <i class="fa-solid fa-calendar-check"></i> Book Scan
+                <i class="fa-solid fa-calendar-check"></i> <span data-i18n="portal.tabBook">Book Scan</span>
               </button>
             </div>
 
@@ -486,38 +354,38 @@
 
             <form id="portal-form" class="relative z-10 space-y-4" onsubmit="handleRetrieveResults(event)">
               <div>
-                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Sample / Order ID</label>
+                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1" data-i18n="portal.sampleLabel">Sample / Order ID</label>
                 <input type="text" id="sample-id" placeholder="e.g., WUD-109823" required class="input-glow w-full px-4 py-3 rounded-lg border border-gray-200 bg-white/80 focus:border-brand text-sm outline-none">
               </div>
               <div>
-                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Phone Number</label>
+                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1" data-i18n="portal.phoneLabel">Phone Number</label>
                 <input type="tel" id="phone-number" placeholder="+251 9... " required class="input-glow w-full px-4 py-3 rounded-lg border border-gray-200 bg-white/80 focus:border-brand text-sm outline-none">
               </div>
               <button type="submit" id="retrieve-btn" class="btn-futuristic btn-primary w-full py-3.5 text-white font-bold rounded-lg flex justify-center items-center text-sm">
-                <i class="fa-solid fa-magnifying-glass mr-2 text-xs"></i> <span>Retrieve Test Results</span>
+                <i class="fa-solid fa-magnifying-glass mr-2 text-xs"></i> <span data-i18n="portal.retrieveBtn">Retrieve Test Results</span>
               </button>
             </form>
 
             <form id="book-form" class="relative z-10 space-y-4 hidden" onsubmit="handleBooking(event)">
               <div>
-                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Full Name</label>
+                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1" data-i18n="portal.nameLabel">Full Name</label>
                 <input type="text" id="patient-name" placeholder="Abebe Bikila" required class="input-glow w-full px-4 py-3 rounded-lg border border-gray-200 bg-white/80 focus:border-brand text-sm outline-none">
               </div>
               <div>
-                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">Select Service</label>
+                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1" data-i18n="portal.serviceLabel">Select Service</label>
                 <select id="service-type" required class="input-glow w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand text-sm outline-none bg-white/80">
-                  <option value="">-- Choose Diagnostic Service --</option>
-                  <option value="ambulance">Ambulance Services</option>
-                  <option value="ct">CT-Scan</option>
-                  <option value="endoscopy">Endoscopy and Colonoscopy</option>
-                  <option value="lab">Laboratory</option>
-                  <option value="mri">MRI</option>
-                  <option value="radiography">Radiography (Digital X-Ray)</option>
-                  <option value="ultrasound">Ultrasonography</option>
+                  <option value="" data-i18n="portal.serviceDefault">-- Choose Diagnostic Service --</option>
+                  <option value="ambulance" data-i18n="serviceShort.ambulance">Ambulance Services</option>
+                  <option value="ct" data-i18n="serviceShort.ctscan">CT-Scan</option>
+                  <option value="endoscopy" data-i18n="serviceShort.endoscopy">Endoscopy and Colonoscopy</option>
+                  <option value="lab" data-i18n="serviceShort.laboratory">Laboratory</option>
+                  <option value="mri" data-i18n="serviceShort.mri">MRI</option>
+                  <option value="radiography" data-i18n="serviceShort.radiography">Radiography (Digital X-Ray)</option>
+                  <option value="ultrasound" data-i18n="serviceShort.ultrasound">Ultrasonography</option>
                 </select>
               </div>
               <button type="submit" id="book-btn" class="btn-futuristic btn-primary w-full py-3.5 text-white font-bold rounded-lg flex justify-center items-center text-sm">
-                <i class="fa-solid fa-calendar-plus mr-2 text-xs"></i> <span>Request Appointment</span>
+                <i class="fa-solid fa-calendar-plus mr-2 text-xs"></i> <span data-i18n="portal.bookBtn">Request Appointment</span>
               </button>
             </form>
           </div>
@@ -531,86 +399,74 @@
   <main id="page-about" class="page-view hidden py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
 
-      <div class="reveal liquid-glass p-8 sm:p-10 rounded-3xl">
-        <h1 class="relative z-10 text-3xl sm:text-4xl font-black text-gray-900 font-display">About Wudassie Diagnostic Center</h1>
-        <p class="relative z-10 text-xs sm:text-sm text-brand font-bold uppercase tracking-wider mt-2">Established 2008 in Addis Ababa, Ethiopia</p>
+      <div class="reveal liquid-glass glow-card p-8 sm:p-10 rounded-3xl relative overflow-hidden">
+        <i class="fa-solid fa-staff-snake absolute -right-6 -bottom-8 text-[10rem] text-brand/5 z-0"></i>
+        <span class="relative z-10 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-black bg-red-100 text-brand border border-red-200 mb-4" data-i18n="about.badgeEstablished">Established 2008 in Addis Ababa, Ethiopia</span>
+        <h1 class="relative z-10 text-3xl sm:text-4xl font-black text-gray-900 font-display" data-i18n="about.headerTitle">About Wudassie Diagnostic Center</h1>
       </div>
 
-      <!-- Who We Are -->
       <div class="grid lg:grid-cols-12 gap-8 items-start">
         <div class="reveal lg:col-span-8 space-y-4 text-gray-700 leading-relaxed text-sm sm:text-base">
-          <h2 class="text-2xl font-bold text-gray-900 border-b pb-2">Who We Are</h2>
-          <p>
-            Founded in 2008 by <strong>Dawit Hailu and his family</strong>, Wudassie Diagnostic Center (WDC) is one of the first diagnostic centers with MRI, CT scan, Digital X-ray, Ultrasound, EKG, and Ambulance service in Ethiopia.
-          </p>
-          <p>
-            WDC's passion for quality, cost-effectiveness, and exceptional patient care were contagious and continue to be our core principles of operation. WDC is dedicated to providing the community in and outside Addis Ababa with the finest imaging services by a local team of specialized physicians and associates. This ensures that our patients receive care from a team who works closely with the local healthcare community, including the referring physicians.
-          </p>
-          <p>
-            In addition, the WDC team is connected with other physicians and professionals across the country via WDC's network, giving the Center the ability to share best practices and consult with other experts on special cases.
-          </p>
+          <h2 class="text-2xl font-bold text-gray-900 border-b pb-2" data-i18n="about.whoWeAreTitle">Who We Are</h2>
+          <p data-i18n="about.p1">Founded in 2008 by Dawit Hailu and his family, Wudassie Diagnostic Center (WDC) is one of the first diagnostic centers with MRI, CT scan, Digital X-ray, Ultrasound, EKG, and Ambulance service in Ethiopia.</p>
+          <p data-i18n="about.p2">WDC's passion for quality, cost-effectiveness, and exceptional patient care were contagious and continue to be our core principles of operation. WDC is dedicated to providing the community in and outside Addis Ababa with the finest imaging services by a local team of specialized physicians and associates. This ensures that our patients receive care from a team who works closely with the local healthcare community, including the referring physicians.</p>
+          <p data-i18n="about.p3">In addition, the WDC team is connected with other physicians and professionals across the country via WDC's network, giving the Center the ability to share best practices and consult with other experts on special cases.</p>
         </div>
 
-        <!-- Core Operations Stats -->
-        <div class="reveal glow-card lg:col-span-4 liquid-glass p-6 rounded-2xl space-y-4">
-          <h3 class="relative z-10 font-bold text-gray-900 uppercase text-xs tracking-wider text-brand">Core Operations</h3>
-          <div class="relative z-10 border-l-4 border-brand pl-3">
-            <span class="block text-2xl font-black text-gray-900">24/7 / 365</span>
-            <span class="text-xs text-gray-500 font-medium">Continuous Service Operation</span>
+        <div class="lg:col-span-4 space-y-4">
+          <h3 class="reveal font-bold text-gray-900 uppercase text-xs tracking-wider text-brand px-1" data-i18n="about.coreOpsTitle">Core Operations</h3>
+          <div class="reveal glow-card liquid-glass rounded-2xl p-5 flex items-center gap-4">
+            <div class="relative z-10 w-12 h-12 rounded-xl bg-gradient-to-br from-brand-light to-brand-dark text-white flex items-center justify-center shrink-0 shadow-md shadow-brand/20"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <div class="relative z-10">
+              <span class="block text-xl font-black text-gray-900">24/7 / 365</span>
+              <span class="text-xs text-gray-500 font-medium" data-i18n="about.op1Sub">Continuous Service Operation</span>
+            </div>
           </div>
-          <div class="relative z-10 border-l-4 border-brand pl-3">
-            <span class="block text-2xl font-black text-gray-900">13th Month (Pagumen)</span>
-            <span class="text-xs text-gray-500 font-medium">Annual Free Diagnostic Examination</span>
+          <div class="reveal glow-card liquid-glass rounded-2xl p-5 flex items-center gap-4">
+            <div class="relative z-10 w-12 h-12 rounded-xl bg-gradient-to-br from-brand-light to-brand-dark text-white flex items-center justify-center shrink-0 shadow-md shadow-brand/20"><i class="fa-solid fa-gift"></i></div>
+            <div class="relative z-10">
+              <span class="block text-lg font-black text-gray-900" data-i18n="about.op2Title">13th Month (Pagumen)</span>
+              <span class="text-xs text-gray-500 font-medium" data-i18n="about.op2Sub">Annual Free Diagnostic Examination</span>
+            </div>
           </div>
-          <div class="relative z-10 border-l-4 border-brand pl-3">
-            <span class="block text-2xl font-black text-gray-900">7 Languages</span>
-            <span class="text-xs text-gray-500 font-medium">Multi-lingual Staff Communication</span>
+          <div class="reveal glow-card liquid-glass rounded-2xl p-5 flex items-center gap-4">
+            <div class="relative z-10 w-12 h-12 rounded-xl bg-gradient-to-br from-brand-light to-brand-dark text-white flex items-center justify-center shrink-0 shadow-md shadow-brand/20"><i class="fa-solid fa-language"></i></div>
+            <div class="relative z-10">
+              <span class="block text-xl font-black text-gray-900" data-i18n="about.op3Title">7 Languages</span>
+              <span class="text-xs text-gray-500 font-medium" data-i18n="about.op3Sub">Multi-lingual Staff Communication</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Mission, Vision, Values -->
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="reveal glow-card bg-white p-8 rounded-2xl border border-gray-200 shadow-sm space-y-4">
-          <div class="relative z-10 w-10 h-10 rounded-lg bg-red-100 text-brand flex items-center justify-center font-bold">
-            <i class="fa-solid fa-bullseye text-lg"></i>
-          </div>
-          <h3 class="relative z-10 text-xl font-bold text-gray-900">Our Mission & Vision</h3>
-          <div class="relative z-10">
-            <h4 class="font-bold text-sm text-gray-800">MISSION</h4>
-            <p class="text-xs text-gray-600 mt-1 leading-relaxed">
-              WDC provides state-of-the-art diagnostic imaging to physicians, technologists, and clients by blending advanced technology, extensive clinical expertise, and superior provider and patient care.
-            </p>
-          </div>
-          <div class="relative z-10">
-            <h4 class="font-bold text-sm text-gray-800">VISION</h4>
-            <p class="text-xs text-gray-600 mt-1 leading-relaxed">
-              To be the leading state-of-the-art diagnostic imaging service provider with highest quality radiology reporting and ancillary services taking the best interest of patients and their referring physicians.
-            </p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="reveal glow-card bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+          <div class="relative z-10 w-10 h-10 rounded-lg bg-red-100 text-brand flex items-center justify-center font-bold"><i class="fa-solid fa-bullseye"></i></div>
+          <h3 class="relative z-10 text-base font-black text-gray-900" data-i18n="about.missionTitle">Mission</h3>
+          <p class="relative z-10 text-xs text-gray-600 leading-relaxed" data-i18n="about.missionText">WDC provides state-of-the-art diagnostic imaging to physicians, technologists, and clients by blending advanced technology, extensive clinical expertise, and superior provider and patient care.</p>
+        </div>
+        <div class="reveal glow-card bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+          <div class="relative z-10 w-10 h-10 rounded-lg bg-red-100 text-brand flex items-center justify-center font-bold"><i class="fa-solid fa-eye"></i></div>
+          <h3 class="relative z-10 text-base font-black text-gray-900" data-i18n="about.visionTitle">Vision</h3>
+          <p class="relative z-10 text-xs text-gray-600 leading-relaxed" data-i18n="about.visionText">To be the leading state-of-the-art diagnostic imaging service provider with highest quality radiology reporting and ancillary services taking the best interest of patients and their referring physicians.</p>
+        </div>
+        <div class="reveal glow-card bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+          <div class="relative z-10 w-10 h-10 rounded-lg bg-red-100 text-brand flex items-center justify-center font-bold"><i class="fa-solid fa-shield-heart"></i></div>
+          <h3 class="relative z-10 text-base font-black text-gray-900" data-i18n="about.valuesTitle">Core Values</h3>
+          <div class="relative z-10 flex flex-wrap gap-1.5">
+            <span class="px-2.5 py-1 rounded-full bg-brand-surface text-brand text-[10px] font-bold" data-i18n="about.value1">Quality</span>
+            <span class="px-2.5 py-1 rounded-full bg-brand-surface text-brand text-[10px] font-bold" data-i18n="about.value2">Care</span>
+            <span class="px-2.5 py-1 rounded-full bg-brand-surface text-brand text-[10px] font-bold" data-i18n="about.value3">Corporate Social Responsibility</span>
           </div>
         </div>
-
-        <div class="reveal glow-card bg-white p-8 rounded-2xl border border-gray-200 shadow-sm space-y-4">
-          <div class="relative z-10 w-10 h-10 rounded-lg bg-red-100 text-brand flex items-center justify-center font-bold">
-            <i class="fa-solid fa-shield-heart text-lg"></i>
-          </div>
-          <h3 class="relative z-10 text-xl font-bold text-gray-900">Values & Objectives</h3>
-          <div class="relative z-10">
-            <h4 class="font-bold text-sm text-gray-800">CORE VALUES</h4>
-            <ul class="text-xs text-gray-600 space-y-1 mt-1 list-disc list-inside">
-              <li>Quality</li>
-              <li>Care</li>
-              <li>Corporate Social Responsibility</li>
-            </ul>
-          </div>
-          <div class="relative z-10">
-            <h4 class="font-bold text-sm text-gray-800">OBJECTIVES</h4>
-            <ul class="text-xs text-gray-600 space-y-1 mt-1 list-disc list-inside">
-              <li>Better quality diagnostic image & reading 24 hours a day, 7 days a week.</li>
-              <li>Better outcomes assisting physicians in patient diagnosis.</li>
-              <li>Better value for money and invested resources.</li>
-            </ul>
-          </div>
+        <div class="reveal glow-card bg-white p-6 rounded-2xl border border-gray-200 shadow-sm space-y-3">
+          <div class="relative z-10 w-10 h-10 rounded-lg bg-red-100 text-brand flex items-center justify-center font-bold"><i class="fa-solid fa-list-check"></i></div>
+          <h3 class="relative z-10 text-base font-black text-gray-900" data-i18n="about.objectivesTitle">Objectives</h3>
+          <ul class="relative z-10 text-xs text-gray-600 space-y-1.5">
+            <li class="flex gap-1.5"><i class="fa-solid fa-check text-brand text-[10px] mt-0.5"></i><span data-i18n="about.obj1">Better quality diagnostic image & reading 24 hours a day, 7 days a week.</span></li>
+            <li class="flex gap-1.5"><i class="fa-solid fa-check text-brand text-[10px] mt-0.5"></i><span data-i18n="about.obj2">Better outcomes assisting physicians in patient diagnosis.</span></li>
+            <li class="flex gap-1.5"><i class="fa-solid fa-check text-brand text-[10px] mt-0.5"></i><span data-i18n="about.obj3">Better value for money and invested resources.</span></li>
+          </ul>
         </div>
       </div>
 
@@ -620,92 +476,51 @@
   <!-- PAGE 3: 7 DIAGNOSTIC SERVICES SECTION -->
   <main id="page-services" class="page-view hidden py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
       <div class="reveal text-center max-w-2xl mx-auto mb-12">
-        <span class="text-xs font-bold text-brand uppercase tracking-widest">Medical Capabilities</span>
-        <h1 class="text-3xl sm:text-4xl font-black text-gray-900 mt-1 font-display">Our 7 Diagnostic Services</h1>
-        <p class="text-xs text-gray-500 mt-2">High-precision medical imaging & clinical diagnostic services.</p>
+        <span class="text-xs font-bold text-brand uppercase tracking-widest" data-i18n="services.badge">Medical Capabilities</span>
+        <h1 class="text-3xl sm:text-4xl font-black text-gray-900 mt-1 font-display" data-i18n="services.title">Our 7 Diagnostic Services</h1>
+        <p class="text-xs text-gray-500 mt-2" data-i18n="services.subtitle">High-precision medical imaging & clinical diagnostic services.</p>
+      </div>
+      <div id="services-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </main>
+
+  <!-- PAGE 3B: SERVICE DETAIL (templated) -->
+  <main id="page-service-detail" class="page-view hidden py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <button type="button" onclick="navigateTo('services')" class="btn-futuristic btn-outline-glow inline-flex items-center gap-2 px-5 py-2.5 bg-white/80 text-gray-700 border border-gray-200 rounded-full font-bold text-xs hover:border-brand hover:text-brand">
+        <i class="fa-solid fa-arrow-left text-[10px]"></i> <span data-i18n="serviceDetail.back">Back to All Services</span>
+      </button>
+
+      <div class="grid lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="service-orb">
+            <span class="orb-ring ring-1"></span>
+            <span class="orb-ring ring-2"></span>
+            <span class="orb-core liquid-glass"><i id="service-detail-icon" class="fa-solid fa-truck-medical relative z-10"></i></span>
+          </div>
+        </div>
+        <div class="lg:col-span-7 space-y-4">
+          <span id="service-detail-badge" class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-black bg-red-100 text-brand border border-red-200">Service</span>
+          <h1 id="service-detail-title" class="text-3xl sm:text-4xl font-black text-gray-900 font-display"></h1>
+          <p id="service-detail-tagline" class="text-base sm:text-lg text-brand font-bold"></p>
+          <div id="service-detail-paragraphs" class="space-y-3 text-sm sm:text-base text-gray-700 leading-relaxed"></div>
+          <div class="flex flex-wrap gap-4 pt-2">
+            <button type="button" onclick="navigateTo('home'); switchTab('book')" class="btn-futuristic btn-primary px-6 py-3.5 text-white rounded-xl font-bold text-sm">
+              <i class="fa-solid fa-calendar-plus mr-2 text-xs"></i><span data-i18n="serviceDetail.bookBtn">Book This Service</span>
+            </button>
+            <button type="button" onclick="navigateTo('contact')" class="btn-futuristic btn-outline-glow px-6 py-3.5 bg-white/80 text-gray-700 border border-gray-200 rounded-xl font-bold text-sm hover:border-brand hover:text-brand">
+              <span data-i18n="serviceDetail.askBtn">Ask a Question</span>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <!-- 1. Ambulance Services -->
-        <div id="service-ambulance" class="reveal glow-card bg-white p-6 rounded-2xl border border-gray-200 shadow-sm transition-all">
-          <div class="relative z-10 w-10 h-10 rounded-lg bg-red-100 text-brand flex items-center justify-center font-bold mb-4">
-            <i class="fa-solid fa-truck-medical text-lg"></i>
-          </div>
-          <h3 class="relative z-10 text-lg font-bold text-gray-900 mb-2">1. Ambulance Services</h3>
-          <p class="relative z-10 text-xs text-gray-600 leading-relaxed">
-            24/7 patient transport and emergency transfer equipped with trained medical personnel to ensure rapid and safe transit for diagnostic testing.
-          </p>
-        </div>
-
-        <!-- 2. CT-Scan -->
-        <div id="service-ctscan" class="reveal glow-card bg-white p-6 rounded-2xl border border-gray-200 shadow-sm transition-all">
-          <div class="relative z-10 w-10 h-10 rounded-lg bg-red-100 text-brand flex items-center justify-center font-bold mb-4">
-            <i class="fa-solid fa-circle-radiation text-lg"></i>
-          </div>
-          <h3 class="relative z-10 text-lg font-bold text-gray-900 mb-2">2. CT-Scan</h3>
-          <p class="relative z-10 text-xs text-gray-600 leading-relaxed">
-            High-speed multi-slice Computed Tomography for rapid trauma assessment, head, chest, abdominal, and vascular cross-sectional imaging with low radiation exposure.
-          </p>
-        </div>
-
-        <!-- 3. Endoscopy and Colonoscopy -->
-        <div id="service-endoscopy" class="reveal glow-card bg-white p-6 rounded-2xl border border-gray-200 shadow-sm transition-all">
-          <div class="relative z-10 w-10 h-10 rounded-lg bg-red-100 text-brand flex items-center justify-center font-bold mb-4">
-            <i class="fa-solid fa-stethoscope text-lg"></i>
-          </div>
-          <h3 class="relative z-10 text-lg font-bold text-gray-900 mb-2">3. Endoscopy and Colonoscopy</h3>
-          <p class="relative z-10 text-xs text-gray-600 leading-relaxed">
-            Gastrointestinal internal examinations providing direct video visualization of the digestive tract for detection and evaluation of ulcers, bleeding, and mucosal lesions.
-          </p>
-        </div>
-
-        <!-- 4. Laboratory -->
-        <div id="service-laboratory" class="reveal glow-card bg-white p-6 rounded-2xl border border-gray-200 shadow-sm transition-all">
-          <div class="relative z-10 w-10 h-10 rounded-lg bg-red-100 text-brand flex items-center justify-center font-bold mb-4">
-            <i class="fa-solid fa-vial text-lg"></i>
-          </div>
-          <h3 class="relative z-10 text-lg font-bold text-gray-900 mb-2">4. Laboratory</h3>
-          <p class="relative z-10 text-xs text-gray-600 leading-relaxed">
-            Wudassie Advanced Diagnostic Laboratory offers comprehensive chemistry, hematology, urinalysis, microbiology, hormone profiling, ELISA, and PCR testing.
-          </p>
-        </div>
-
-        <!-- 5. MRI -->
-        <div id="service-mri" class="reveal glow-card bg-white p-6 rounded-2xl border border-gray-200 shadow-sm transition-all">
-          <div class="relative z-10 w-10 h-10 rounded-lg bg-red-100 text-brand flex items-center justify-center font-bold mb-4">
-            <i class="fa-solid fa-magnet text-lg"></i>
-          </div>
-          <h3 class="relative z-10 text-lg font-bold text-gray-900 mb-2">5. MRI</h3>
-          <p class="relative z-10 text-xs text-gray-600 leading-relaxed">
-            High-field Magnetic Resonance Imaging delivering detailed neuro-radiology, brain, spinal, musculoskeletal, and soft tissue scans with zero ionizing radiation.
-          </p>
-        </div>
-
-        <!-- 6. Radiography -->
-        <div id="service-radiography" class="reveal glow-card bg-white p-6 rounded-2xl border border-gray-200 shadow-sm transition-all">
-          <div class="relative z-10 w-10 h-10 rounded-lg bg-red-100 text-brand flex items-center justify-center font-bold mb-4">
-            <i class="fa-solid fa-x-ray text-lg"></i>
-          </div>
-          <h3 class="relative z-10 text-lg font-bold text-gray-900 mb-2">6. Radiography</h3>
-          <p class="relative z-10 text-xs text-gray-600 leading-relaxed">
-            First center to introduce high-resolution Digital X-Ray services in Ethiopia for fast orthopedic, chest, abdominal, and specialized contrast examinations.
-          </p>
-        </div>
-
-        <!-- 7. Ultrasonography -->
-        <div id="service-ultrasound" class="reveal glow-card bg-white p-6 rounded-2xl border border-gray-200 shadow-sm transition-all md:col-span-2 lg:col-span-1">
-          <div class="relative z-10 w-10 h-10 rounded-lg bg-red-100 text-brand flex items-center justify-center font-bold mb-4">
-            <i class="fa-solid fa-wave-square text-lg"></i>
-          </div>
-          <h3 class="relative z-10 text-lg font-bold text-gray-900 mb-2">7. Ultrasonography</h3>
-          <p class="relative z-10 text-xs text-gray-600 leading-relaxed">
-            Advanced 3D/4D ultrasound imaging and Doppler ultrasound studies for obstetric, abdominal, vascular, thyroid, and pelvic diagnostic evaluations.
-          </p>
-        </div>
-
+      <div class="liquid-glass glow-card rounded-3xl p-6 sm:p-8">
+        <h3 class="relative z-10 font-black text-gray-900 text-lg mb-5 flex items-center gap-2">
+          <i class="fa-solid fa-star text-brand"></i> <span data-i18n="serviceDetail.whyChoose">Why Choose Wudassie</span>
+        </h3>
+        <ul id="service-detail-features" class="relative z-10 grid sm:grid-cols-2 gap-3"></ul>
       </div>
     </div>
   </main>
@@ -714,8 +529,8 @@
   <main id="page-gallery" class="page-view hidden py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="reveal text-center max-w-2xl mx-auto mb-10">
-        <span class="text-xs font-bold text-brand uppercase tracking-widest">Center Tour</span>
-        <h1 class="text-3xl font-black text-gray-900 sm:text-4xl mt-1 font-display">Facility & Equipment Gallery</h1>
+        <span class="text-xs font-bold text-brand uppercase tracking-widest" data-i18n="gallery.badge">Center Tour</span>
+        <h1 class="text-3xl font-black text-gray-900 sm:text-4xl mt-1 font-display" data-i18n="gallery.title">Facility & Equipment Gallery</h1>
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -724,8 +539,8 @@
           <div class="gallery-tile absolute inset-0 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900"></div>
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
           <div class="absolute bottom-0 p-6">
-            <span class="relative text-white font-bold text-lg block">MRI Scanning Suite</span>
-            <span class="relative text-xs text-gray-300">Magnetic Resonance Suite</span>
+            <span class="relative text-white font-bold text-lg block" data-i18n="gallery.tile1Title">MRI Scanning Suite</span>
+            <span class="relative text-xs text-gray-300" data-i18n="gallery.tile1Sub">Magnetic Resonance Suite</span>
           </div>
         </div>
         <div class="reveal gallery-frame hud-frame rounded-2xl h-64 relative overflow-hidden shadow-lg">
@@ -733,8 +548,8 @@
           <div class="gallery-tile absolute inset-0 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900"></div>
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
           <div class="absolute bottom-0 p-6">
-            <span class="relative text-white font-bold text-lg block">Digital Radiography Unit</span>
-            <span class="relative text-xs text-gray-300">High-Precision X-Ray</span>
+            <span class="relative text-white font-bold text-lg block" data-i18n="gallery.tile2Title">Digital Radiography Unit</span>
+            <span class="relative text-xs text-gray-300" data-i18n="gallery.tile2Sub">High-Precision X-Ray</span>
           </div>
         </div>
         <div class="reveal gallery-frame hud-frame rounded-2xl h-64 relative overflow-hidden shadow-lg">
@@ -742,8 +557,8 @@
           <div class="gallery-tile absolute inset-0 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900"></div>
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
           <div class="absolute bottom-0 p-6">
-            <span class="relative text-white font-bold text-lg block">Ambulance Emergency Vehicle</span>
-            <span class="relative text-xs text-gray-300">24/7 Transport Service</span>
+            <span class="relative text-white font-bold text-lg block" data-i18n="gallery.tile3Title">Ambulance Emergency Vehicle</span>
+            <span class="relative text-xs text-gray-300" data-i18n="gallery.tile3Sub">24/7 Transport Service</span>
           </div>
         </div>
       </div>
@@ -755,25 +570,20 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       <div class="reveal text-center max-w-2xl mx-auto mb-12">
-        <span class="text-xs font-black text-brand uppercase tracking-widest">Patient & Doctor Feedback</span>
-        <h1 class="text-3xl sm:text-4xl font-black text-gray-900 mt-1 font-display">Patient Testimonials</h1>
-        <p class="text-xs sm:text-sm font-extrabold text-gray-600 mt-2">Authentic reviews from doctors and patients served by Wudassie Diagnostic Center.</p>
+        <span class="text-xs font-black text-brand uppercase tracking-widest" data-i18n="testimonials.badge">Patient & Doctor Feedback</span>
+        <h1 class="text-3xl sm:text-4xl font-black text-gray-900 mt-1 font-display" data-i18n="testimonials.title">Patient Testimonials</h1>
+        <p class="text-xs sm:text-sm font-extrabold text-gray-600 mt-2" data-i18n="testimonials.subtitle">Authentic reviews from doctors and patients served by Wudassie Diagnostic Center.</p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        <!-- Review 1 -->
         <div class="reveal glow-card bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-sm space-y-4 flex flex-col justify-between transition-colors">
           <div class="relative z-10">
             <div class="flex items-center justify-between mb-3">
               <div class="text-brand text-xl"><i class="fa-solid fa-quote-left"></i></div>
-              <div class="flex text-amber-400 text-xs gap-1">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-              </div>
+              <div class="flex text-amber-400 text-xs gap-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             </div>
-            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">
-              "Wudassie's MRI imaging precision and fast report delivery saved critical time for my patient's care plan. Exceptional staff professionalism."
-            </p>
+            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">"Wudassie's MRI imaging precision and fast report delivery saved critical time for my patient's care plan. Exceptional staff professionalism."</p>
           </div>
           <div class="relative z-10 border-t border-gray-100 pt-4 mt-2">
             <span class="block text-sm font-black text-gray-900">— Dr. Samuel Tadesse</span>
@@ -781,18 +591,13 @@
           </div>
         </div>
 
-        <!-- Review 2 -->
         <div class="reveal glow-card bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-sm space-y-4 flex flex-col justify-between transition-colors">
           <div class="relative z-10">
             <div class="flex items-center justify-between mb-3">
               <div class="text-brand text-xl"><i class="fa-solid fa-quote-left"></i></div>
-              <div class="flex text-amber-400 text-xs gap-1">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-              </div>
+              <div class="flex text-amber-400 text-xs gap-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             </div>
-            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">
-              "The automated patient portal allowed me to view my lab results and ultrasound scan right from my phone within hours. Truly world-class service in Addis Ababa!"
-            </p>
+            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">"The automated patient portal allowed me to view my lab results and ultrasound scan right from my phone within hours. Truly world-class service in Addis Ababa!"</p>
           </div>
           <div class="relative z-10 border-t border-gray-100 pt-4 mt-2">
             <span class="block text-sm font-black text-gray-900">— Bethlehem Alemu</span>
@@ -800,18 +605,13 @@
           </div>
         </div>
 
-        <!-- Review 3 -->
         <div class="reveal glow-card bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-sm space-y-4 flex flex-col justify-between transition-colors">
           <div class="relative z-10">
             <div class="flex items-center justify-between mb-3">
               <div class="text-brand text-xl"><i class="fa-solid fa-quote-left"></i></div>
-              <div class="flex text-amber-400 text-xs gap-1">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-              </div>
+              <div class="flex text-amber-400 text-xs gap-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             </div>
-            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">
-              "Open 24/7 with compassionate care. The technicians explained every step of my CT scan with great kindness and patience."
-            </p>
+            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">"Open 24/7 with compassionate care. The technicians explained every step of my CT scan with great kindness and patience."</p>
           </div>
           <div class="relative z-10 border-t border-gray-100 pt-4 mt-2">
             <span class="block text-sm font-black text-gray-900">— Dawit Yohannes</span>
@@ -819,18 +619,13 @@
           </div>
         </div>
 
-        <!-- Review 4 -->
         <div class="reveal glow-card bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-sm space-y-4 flex flex-col justify-between transition-colors">
           <div class="relative z-10">
             <div class="flex items-center justify-between mb-3">
               <div class="text-brand text-xl"><i class="fa-solid fa-quote-left"></i></div>
-              <div class="flex text-amber-400 text-xs gap-1">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-              </div>
+              <div class="flex text-amber-400 text-xs gap-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             </div>
-            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">
-              "Wudassie Diagnostic Center is my primary referral center for complex neurological imaging. Their high-field MRI scans give crystal clear details that make differential diagnosis so much easier."
-            </p>
+            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">"Wudassie Diagnostic Center is my primary referral center for complex neurological imaging. Their high-field MRI scans give crystal clear details that make differential diagnosis so much easier."</p>
           </div>
           <div class="relative z-10 border-t border-gray-100 pt-4 mt-2">
             <span class="block text-sm font-black text-gray-900">— Dr. Martha Kebede</span>
@@ -838,18 +633,13 @@
           </div>
         </div>
 
-        <!-- Review 5 -->
         <div class="reveal glow-card bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-sm space-y-4 flex flex-col justify-between transition-colors">
           <div class="relative z-10">
             <div class="flex items-center justify-between mb-3">
               <div class="text-brand text-xl"><i class="fa-solid fa-quote-left"></i></div>
-              <div class="flex text-amber-400 text-xs gap-1">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-              </div>
+              <div class="flex text-amber-400 text-xs gap-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             </div>
-            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">
-              "During my pregnancy, I had my 4D ultrasound done at Wudassie. The staff were so warm, respectful, and gave us clear image prints that made my family feel so safe and happy."
-            </p>
+            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">"During my pregnancy, I had my 4D ultrasound done at Wudassie. The staff were so warm, respectful, and gave us clear image prints that made my family feel so safe and happy."</p>
           </div>
           <div class="relative z-10 border-t border-gray-100 pt-4 mt-2">
             <span class="block text-sm font-black text-gray-900">— Selamawit Hailu</span>
@@ -857,18 +647,13 @@
           </div>
         </div>
 
-        <!-- Review 6 -->
         <div class="reveal glow-card bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-sm space-y-4 flex flex-col justify-between transition-colors">
           <div class="relative z-10">
             <div class="flex items-center justify-between mb-3">
               <div class="text-brand text-xl"><i class="fa-solid fa-quote-left"></i></div>
-              <div class="flex text-amber-400 text-xs gap-1">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-              </div>
+              <div class="flex text-amber-400 text-xs gap-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             </div>
-            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">
-              "I am deeply thankful for Wudassie's Pagumen free scanning campaign. My father received a vital CT scan when we couldn't afford it elsewhere. God bless Mr. Dawit and the entire team!"
-            </p>
+            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">"I am deeply thankful for Wudassie's Pagumen free scanning campaign. My father received a vital CT scan when we couldn't afford it elsewhere. God bless Mr. Dawit and the entire team!"</p>
           </div>
           <div class="relative z-10 border-t border-gray-100 pt-4 mt-2">
             <span class="block text-sm font-black text-gray-900">— Yared Bekele</span>
@@ -876,18 +661,13 @@
           </div>
         </div>
 
-        <!-- Review 7 -->
         <div class="reveal glow-card bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-sm space-y-4 flex flex-col justify-between transition-colors">
           <div class="relative z-10">
             <div class="flex items-center justify-between mb-3">
               <div class="text-brand text-xl"><i class="fa-solid fa-quote-left"></i></div>
-              <div class="flex text-amber-400 text-xs gap-1">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-              </div>
+              <div class="flex text-amber-400 text-xs gap-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             </div>
-            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">
-              "The speed and accuracy of their laboratory blood work and cardiac echocardiogram are unmatched in Addis Ababa. I received my full health profile in under two hours."
-            </p>
+            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">"The speed and accuracy of their laboratory blood work and cardiac echocardiogram are unmatched in Addis Ababa. I received my full health profile in under two hours."</p>
           </div>
           <div class="relative z-10 border-t border-gray-100 pt-4 mt-2">
             <span class="block text-sm font-black text-gray-900">— Solomon Girma</span>
@@ -895,18 +675,13 @@
           </div>
         </div>
 
-        <!-- Review 8 -->
         <div class="reveal glow-card bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-sm space-y-4 flex flex-col justify-between transition-colors">
           <div class="relative z-10">
             <div class="flex items-center justify-between mb-3">
               <div class="text-brand text-xl"><i class="fa-solid fa-quote-left"></i></div>
-              <div class="flex text-amber-400 text-xs gap-1">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-              </div>
+              <div class="flex text-amber-400 text-xs gap-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             </div>
-            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">
-              "As an orthopedic surgeon, I rely heavily on clean digital X-rays. Wudassie consistently delivers outstanding contrast and resolution for my bone trauma patients."
-            </p>
+            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">"As an orthopedic surgeon, I rely heavily on clean digital X-rays. Wudassie consistently delivers outstanding contrast and resolution for my bone trauma patients."</p>
           </div>
           <div class="relative z-10 border-t border-gray-100 pt-4 mt-2">
             <span class="block text-sm font-black text-gray-900">— Dr. Henok Worku</span>
@@ -914,18 +689,13 @@
           </div>
         </div>
 
-        <!-- Review 9 -->
         <div class="reveal glow-card bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-sm space-y-4 flex flex-col justify-between transition-colors">
           <div class="relative z-10">
             <div class="flex items-center justify-between mb-3">
               <div class="text-brand text-xl"><i class="fa-solid fa-quote-left"></i></div>
-              <div class="flex text-amber-400 text-xs gap-1">
-                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-              </div>
+              <div class="flex text-amber-400 text-xs gap-1"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             </div>
-            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">
-              "The digital mammography screening process was handled with the utmost privacy and care. The female radiologists were extremely empathetic and reassuring throughout."
-            </p>
+            <p class="text-xs sm:text-sm font-bold text-gray-800 leading-relaxed italic">"The digital mammography screening process was handled with the utmost privacy and care. The female radiologists were extremely empathetic and reassuring throughout."</p>
           </div>
           <div class="relative z-10 border-t border-gray-100 pt-4 mt-2">
             <span class="block text-sm font-black text-gray-900">— Meseret Assefa</span>
@@ -944,40 +714,33 @@
       <div class="grid lg:grid-cols-2 gap-12">
         <div class="reveal space-y-8">
           <div>
-            <span class="text-xs font-black text-brand uppercase tracking-widest">Get In Touch</span>
-            <h1 class="text-3xl sm:text-4xl font-black text-gray-900 mt-1 font-display">Contact Wudassie Diagnostic Center</h1>
-            <p class="text-xs sm:text-sm font-extrabold text-gray-600 mt-2">Reach out for appointments, ambulance dispatch, or diagnostic result support.</p>
+            <span class="text-xs font-black text-brand uppercase tracking-widest" data-i18n="contact.badge">Get In Touch</span>
+            <h1 class="text-3xl sm:text-4xl font-black text-gray-900 mt-1 font-display" data-i18n="contact.title">Contact Wudassie Diagnostic Center</h1>
+            <p class="text-xs sm:text-sm font-extrabold text-gray-600 mt-2" data-i18n="contact.subtitle">Reach out for appointments, ambulance dispatch, or diagnostic result support.</p>
           </div>
 
           <div class="space-y-6">
             <div class="flex items-start space-x-4">
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-light to-brand-dark text-white flex items-center justify-center font-black text-xl shrink-0 shadow-md shadow-brand/20">
-                <i class="fa-solid fa-phone"></i>
-              </div>
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-light to-brand-dark text-white flex items-center justify-center font-black text-xl shrink-0 shadow-md shadow-brand/20"><i class="fa-solid fa-phone"></i></div>
               <div>
-                <span class="block text-xs font-black uppercase text-gray-900 tracking-wider">24/7 Emergency & Appointments Hotline</span>
+                <span class="block text-xs font-black uppercase text-gray-900 tracking-wider" data-i18n="contact.hotlineLabel">24/7 Emergency & Appointments Hotline</span>
                 <a href="tel:+251940101010" class="text-lg font-black text-brand hover:underline block">+251 940 101010</a>
-                <span class="text-xs font-bold text-gray-800">Alternative Line: +251 904 101010</span>
+                <span class="text-xs font-bold text-gray-800"><span data-i18n="contact.altLine">Alternative Line:</span> +251 904 101010</span>
               </div>
             </div>
 
             <div class="flex items-start space-x-4">
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-light to-brand-dark text-white flex items-center justify-center font-black text-xl shrink-0 shadow-md shadow-brand/20">
-                <i class="fa-solid fa-envelope"></i>
-              </div>
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-light to-brand-dark text-white flex items-center justify-center font-black text-xl shrink-0 shadow-md shadow-brand/20"><i class="fa-solid fa-envelope"></i></div>
               <div>
-                <span class="block text-xs font-black uppercase text-gray-900 tracking-wider">Email Enquiries</span>
+                <span class="block text-xs font-black uppercase text-gray-900 tracking-wider" data-i18n="contact.emailLabel">Email Enquiries</span>
                 <a href="mailto:info@wudassie.com" class="text-base font-black text-gray-900 hover:text-brand transition-colors">info@wudassie.com</a>
               </div>
             </div>
 
-            <!-- BOLD Main Facility Address -->
             <div class="flex items-start space-x-4">
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-light to-brand-dark text-white flex items-center justify-center font-black text-xl shrink-0 shadow-md shadow-brand/20">
-                <i class="fa-solid fa-location-dot"></i>
-              </div>
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-light to-brand-dark text-white flex items-center justify-center font-black text-xl shrink-0 shadow-md shadow-brand/20"><i class="fa-solid fa-location-dot"></i></div>
               <div>
-                <span class="block text-xs font-black uppercase text-gray-900 tracking-wider">Main Facility Address</span>
+                <span class="block text-xs font-black uppercase text-gray-900 tracking-wider" data-i18n="contact.addressLabel">Main Facility Address</span>
                 <span class="text-base font-black text-gray-900 block">MK Building, Churchill Road</span>
                 <span class="text-xs font-black text-gray-800 block mt-0.5">Past Tewodros Square / in front of Lion Pharmacy, Addis Ababa, Ethiopia</span>
               </div>
@@ -985,95 +748,81 @@
           </div>
         </div>
 
-        <!-- Direct Contact Form -->
         <form class="reveal liquid-glass p-6 sm:p-8 rounded-3xl space-y-4" onsubmit="handleContact(event)">
-          <h3 class="relative z-10 font-black text-gray-900 text-lg mb-2">Send Us a Direct Message</h3>
+          <h3 class="relative z-10 font-black text-gray-900 text-lg mb-2" data-i18n="contact.formTitle">Send Us a Direct Message</h3>
 
           <div id="contact-alert" class="relative z-10 hidden p-3.5 rounded-xl text-xs font-bold"></div>
 
           <div class="relative z-10">
-            <label class="block text-xs font-black text-gray-900 uppercase mb-1">Your Full Name</label>
+            <label class="block text-xs font-black text-gray-900 uppercase mb-1" data-i18n="contact.nameLabel">Your Full Name</label>
             <input type="text" required placeholder="e.g. Samuel Tadesse" class="input-glow w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/80 text-sm font-bold focus:border-brand outline-none">
           </div>
           <div class="relative z-10">
-            <label class="block text-xs font-black text-gray-900 uppercase mb-1">Email / Phone Number</label>
-            <input type="text" required placeholder="Phone or email..." class="input-glow w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/80 text-sm font-bold focus:border-brand outline-none">
+            <label class="block text-xs font-black text-gray-900 uppercase mb-1" data-i18n="contact.emailPhoneLabel">Email / Phone Number</label>
+            <input type="text" required data-i18n-placeholder="contact.emailPhonePlaceholder" placeholder="Phone or email..." class="input-glow w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/80 text-sm font-bold focus:border-brand outline-none">
           </div>
           <div class="relative z-10">
-            <label class="block text-xs font-black text-gray-900 uppercase mb-1">Message / Inquiry</label>
-            <textarea rows="4" required placeholder="Write your message here..." class="input-glow w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/80 text-sm font-bold focus:border-brand outline-none"></textarea>
+            <label class="block text-xs font-black text-gray-900 uppercase mb-1" data-i18n="contact.messageLabel">Message / Inquiry</label>
+            <textarea rows="4" required data-i18n-placeholder="contact.messagePlaceholder" placeholder="Write your message here..." class="input-glow w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/80 text-sm font-bold focus:border-brand outline-none"></textarea>
           </div>
           <button type="submit" class="btn-futuristic btn-primary relative z-10 w-full py-3.5 text-white font-black text-sm rounded-xl">
-            Submit Message
+            <span data-i18n="contact.submitBtn">Submit Message</span>
           </button>
         </form>
       </div>
 
-      <!-- LOCATION AND MAP EMBED -->
       <div class="reveal liquid-glass rounded-3xl p-6 sm:p-8 lg:p-10">
         <div class="relative z-10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
-          <!-- Left Info Panel -->
           <div class="lg:col-span-5 space-y-6">
             <div>
               <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-black bg-red-100 text-brand mb-3 border border-red-200">
-                <i class="fa-solid fa-map-pin"></i> Main Branch Location
+                <i class="fa-solid fa-map-pin"></i> <span data-i18n="contact.mapBadge">Main Branch Location</span>
               </div>
-              <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight font-display">Visit Our Main Facility</h2>
-              <p class="text-xs sm:text-sm font-extrabold text-gray-700 mt-1.5">Conveniently situated in the center of Addis Ababa.</p>
+              <h2 class="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight font-display" data-i18n="contact.mapTitle">Visit Our Main Facility</h2>
+              <p class="text-xs sm:text-sm font-extrabold text-gray-700 mt-1.5" data-i18n="contact.mapSubtitle">Conveniently situated in the center of Addis Ababa.</p>
             </div>
 
             <div class="space-y-4 text-xs sm:text-sm border-t-2 border-b-2 border-gray-200/70 py-5">
               <div class="flex items-start gap-3.5">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-light to-brand-dark text-white flex items-center justify-center shrink-0 font-black text-sm shadow-md shadow-brand/20">
-                  <i class="fa-solid fa-building"></i>
-                </div>
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-light to-brand-dark text-white flex items-center justify-center shrink-0 font-black text-sm shadow-md shadow-brand/20"><i class="fa-solid fa-building"></i></div>
                 <div>
-                  <span class="block font-black text-gray-900 text-xs uppercase tracking-wider">Address</span>
+                  <span class="block font-black text-gray-900 text-xs uppercase tracking-wider" data-i18n="contact.addressBlockLabel">Address</span>
                   <span class="text-gray-900 font-black text-sm block">MK Building, Churchill Road</span>
                   <span class="block text-gray-800 font-extrabold text-xs mt-0.5 leading-snug">Past Tewodros Square / in front of Lion Pharmacy, Addis Ababa, Ethiopia</span>
                 </div>
               </div>
 
               <div class="flex items-start gap-3.5">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-light to-brand-dark text-white flex items-center justify-center shrink-0 font-black text-sm shadow-md shadow-brand/20">
-                  <i class="fa-solid fa-phone"></i>
-                </div>
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-light to-brand-dark text-white flex items-center justify-center shrink-0 font-black text-sm shadow-md shadow-brand/20"><i class="fa-solid fa-phone"></i></div>
                 <div>
-                  <span class="block font-black text-gray-900 text-xs uppercase tracking-wider">24/7 Hotline & Emergency</span>
+                  <span class="block font-black text-gray-900 text-xs uppercase tracking-wider" data-i18n="contact.hotlineBlockLabel">24/7 Hotline & Emergency</span>
                   <a href="tel:+251940101010" class="text-brand font-black hover:underline text-base block">+251 940 101010</a>
-                  <span class="block text-gray-800 font-bold text-xs">Alternative Line: +251 904 101010</span>
+                  <span class="block text-gray-800 font-bold text-xs"><span data-i18n="contact.altLine">Alternative Line:</span> +251 904 101010</span>
                 </div>
               </div>
 
               <div class="flex items-start gap-3.5">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-light to-brand-dark text-white flex items-center justify-center shrink-0 font-black text-sm shadow-md shadow-brand/20">
-                  <i class="fa-solid fa-clock"></i>
-                </div>
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-light to-brand-dark text-white flex items-center justify-center shrink-0 font-black text-sm shadow-md shadow-brand/20"><i class="fa-solid fa-clock"></i></div>
                 <div>
-                  <span class="block font-black text-gray-900 text-xs uppercase tracking-wider">Operating Hours</span>
-                  <span class="text-gray-900 font-black text-sm">24 Hours / 7 Days / 365 Days</span>
+                  <span class="block font-black text-gray-900 text-xs uppercase tracking-wider" data-i18n="contact.hoursLabel">Operating Hours</span>
+                  <span class="text-gray-900 font-black text-sm" data-i18n="contact.hoursValue">24 Hours / 7 Days / 365 Days</span>
                 </div>
               </div>
             </div>
 
             <div>
               <a href="https://maps.app.goo.gl/bcnHkSp4PZPFBF3p9" target="_blank" rel="noopener noreferrer" class="btn-futuristic btn-primary inline-flex items-center justify-center gap-2 px-6 py-3.5 text-white font-black text-xs sm:text-sm rounded-xl">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i> Open in Google Maps
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="contact.openMaps">Open in Google Maps</span>
               </a>
             </div>
           </div>
 
-          <!-- Interactive Map Frame -->
           <div class="hud-frame lg:col-span-7 h-72 sm:h-96 rounded-2xl overflow-hidden shadow-2xl border border-white/40 relative bg-gray-100">
             <span class="hud-corner tl"></span><span class="hud-corner tr"></span><span class="hud-corner bl"></span><span class="hud-corner br"></span>
             <iframe
               title="Wudassie Diagnostic Center Churchill Road Location"
-              width="100%"
-              height="100%"
-              style="border:0;"
-              loading="lazy"
-              allowfullscreen
+              width="100%" height="100%" style="border:0;" loading="lazy" allowfullscreen
               referrerpolicy="no-referrer-when-downgrade"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.5432109!2d38.751977!3d9.028373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMDEnNDIuMSJOIDM4wrA0NScwNy4xIkU!5e0!3m2!1sen!2set!4v1710000000000">
             </iframe>
@@ -1089,13 +838,262 @@
   <footer class="relative bg-gray-900 text-gray-400 text-xs py-8 border-t border-gray-800 mt-12 overflow-hidden">
     <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-light to-transparent"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-2 relative z-10">
-      <p>&copy; 2026 Wudassie Diagnostic Center. All rights reserved.</p>
-      <p>Working For You — Uncompromising Image Quality & Patient Care.</p>
+      <p data-i18n="footer.copyright">&copy; 2026 Wudassie Diagnostic Center. All rights reserved.</p>
+      <p data-i18n="footer.tagline">Working For You — Uncompromising Image Quality & Patient Care.</p>
     </div>
   </footer>
 
-  <!-- ROUTING, INTERACTION & MOTION SCRIPTS -->
+  <!-- DATA: SERVICES -->
   <script>
+    const serviceData = {
+      ambulance: { number: 1, icon: 'fa-truck-medical',
+        en: { title: "Ambulance Services", short: "24/7 patient transport and emergency transfer with trained medical personnel for rapid, safe transit.", tagline: "Rapid Response, Anywhere in Addis Ababa",
+          paragraphs: [
+            "Wudassie's fleet of fully-equipped ambulances operates around the clock, staffed by trained paramedics ready to respond to emergencies and scheduled patient transfers alike. Every vehicle carries essential life-support equipment, oxygen supply, and direct radio contact with our diagnostic teams.",
+            "Whether you need urgent transport to our facility for time-critical imaging or a safe, comfortable transfer between hospitals, our dispatch team coordinates every step so care is never interrupted."
+          ],
+          features: ["24/7 Emergency Dispatch", "Trained Paramedic Crew", "Advanced Life-Support Equipment", "Direct Hospital Coordination"] },
+        am: { title: "የአምቡላንስ አገልግሎት", short: "በሰለጠኑ የህክምና ባለሙያዎች የሚከናወን 24/7 የታካሚ መጓጓዣ እና የአደጋ ጊዜ ዝውውር።", tagline: "ፈጣን ምላሽ፣ በአዲስ አበባ በየትኛውም ቦታ",
+          paragraphs: [
+            "የውዳሴ ሙሉ ዝግጅት ያላቸው አምቡላንሶች ሌት ተቀን ያገለግላሉ፤ የሰለጠኑ የድንገተኛ ህክምና ባለሙያዎች ለአደጋ ጊዜ ምላሽ እና ለታቀዱ የታካሚ ዝውውሮች ዝግጁ ናቸው። እያንዳንዱ ተሽከርካሪ አስፈላጊ የህይወት ማቆያ መሳሪያዎችን፣ የኦክስጅን አቅርቦትን እና ከምርመራ ቡድናችን ጋር ቀጥተኛ የሬዲዮ ግንኙነትን ይዟል።",
+            "ለአስቸኳይ ምስል ምርመራ ወደ ተቋማችን አፋጣኝ መጓጓዣ ቢያስፈልግዎ ወይም በሆስፒታሎች መካከል ደህንነቱ የተጠበቀ ዝውውር ቢፈልጉ፣ የመላኪያ ቡድናችን እንክብካቤ ሳይቋረጥ እንዲቀጥል እያንዳንዱን ደረጃ ያስተባብራል።"
+          ],
+          features: ["24/7 የአደጋ ጊዜ መላኪያ", "የሰለጠነ የድንገተኛ ህክምና ቡድን", "የላቀ የህይወት ማቆያ መሳሪያ", "ቀጥተኛ የሆስፒታል ቅንጅት"] } },
+
+      ctscan: { number: 2, icon: 'fa-circle-radiation',
+        en: { title: "CT-Scan", short: "High-speed multi-slice CT for rapid trauma, chest, abdominal and vascular imaging with low radiation.", tagline: "Precision Cross-Sectional Imaging, Fast Results",
+          paragraphs: [
+            "Our high-speed multi-slice CT scanner captures detailed cross-sectional images of the body in seconds, giving physicians the clarity they need for rapid trauma assessment, cancer screening, and vascular studies. Low-dose protocols keep radiation exposure to a minimum without compromising image quality.",
+            "From head to abdomen, our radiologists deliver same-day reporting so treatment decisions are never delayed by a wait for results."
+          ],
+          features: ["Multi-Slice High-Speed Scanning", "Low-Radiation Protocols", "Same-Day Radiologist Reports", "Trauma & Vascular Imaging"] },
+        am: { title: "ሲቲ ስካን", short: "ለፈጣን የአደጋ፣ የደረት፣ የሆድ እና የደም ስር ምርመራ ዝቅተኛ ጨረር ያለው ፈጣን ባለብዙ-ንብርብር ሲቲ ስካን።", tagline: "ትክክለኛ የመስቀለኛ ምስል ምርመራ፣ ፈጣን ውጤት",
+          paragraphs: [
+            "ከፍተኛ ፍጥነት ያለው ባለብዙ-ንብርብር የሲቲ ስካን መሳሪያችን በሰከንዶች ውስጥ ዝርዝር የሰውነት መስቀለኛ ምስሎችን ይይዛል፤ ለሐኪሞች ለፈጣን የአደጋ ግምገማ፣ ለካንሰር ምርመራ እና ለደም ስር ጥናቶች የሚያስፈልገውን ግልጽነት ይሰጣል። ዝቅተኛ-መጠን ፕሮቶኮሎች የጨረር መጋለጥን ዝቅ ያደርጋሉ የምስል ጥራትን ሳይነኩ።",
+            "ከጭንቅላት እስከ ሆድ ድረስ፣ ራዲዮሎጂስቶቻችን በተመሳሳይ ቀን ሪፖርት ያቀርባሉ፤ የህክምና ውሳኔዎች በውጤት መጠበቅ ምክንያት አይዘገዩም።"
+          ],
+          features: ["ባለብዙ-ንብርብር ፈጣን ስካን", "ዝቅተኛ-ጨረር ፕሮቶኮል", "በተመሳሳይ ቀን የራዲዮሎጂስት ሪፖርት", "የአደጋ እና የደም ስር ምስል"] } },
+
+      endoscopy: { number: 3, icon: 'fa-stethoscope',
+        en: { title: "Endoscopy and Colonoscopy", short: "Direct video visualization of the digestive tract to detect ulcers, bleeding, and mucosal lesions.", tagline: "Clear Answers for Digestive Health",
+          paragraphs: [
+            "Using high-definition video endoscopy, our specialists directly visualize the esophagus, stomach, and colon to detect ulcers, bleeding, polyps, and mucosal abnormalities with precision. Procedures are performed under careful sedation protocols for patient comfort.",
+            "Our gastroenterology team works closely with referring physicians to ensure findings translate into clear, actionable treatment plans."
+          ],
+          features: ["HD Video Endoscopy", "Sedation for Patient Comfort", "Polyp & Ulcer Detection", "Specialist Gastroenterology Team"] },
+        am: { title: "ኢንዶስኮፒ እና ኮሎኖስኮፒ", short: "ቁስለቶችን፣ ደም መፍሰስን እና ያልተለመዱ ሁኔታዎችን ለማግኘት የምግብ መፍጫ ቱቦን በቀጥታ በቪዲዮ መመልከት።", tagline: "ለምግብ መፍጫ ስርዓት ጤና ግልጽ መልስ",
+          paragraphs: [
+            "ከፍተኛ ጥራት ያለው የቪዲዮ ኢንዶስኮፒ በመጠቀም ባለሙያዎቻችን የጉሮሮ ቱቦን፣ ሆድን እና ትልቁን አንጀት በቀጥታ በመመልከት ቁስለቶችን፣ ደም መፍሰስን፣ ፖሊፖችን እና ያልተለመዱ ሁኔታዎችን በትክክለኛነት ያገኛሉ። ሂደቶች ለታካሚ ምቾት በጥንቃቄ በተደረገ የማደንዘዣ ፕሮቶኮል ይከናወናሉ።",
+            "የጨጓራና አንጀት ቡድናችን ግኝቶች ወደ ግልጽ እና ተግባራዊ የህክምና እቅድ እንዲቀየሩ ከሚያመለክቱ ሐኪሞች ጋር በቅርበት ይሰራል።"
+          ],
+          features: ["ከፍተኛ ጥራት ቪዲዮ ኢንዶስኮፒ", "ለታካሚ ምቾት ማደንዘዣ", "ፖሊፕ እና ቁስለት ማግኘት", "የጨጓራ ስፔሻሊስት ቡድን"] } },
+
+      laboratory: { number: 4, icon: 'fa-vial',
+        en: { title: "Laboratory", short: "Comprehensive chemistry, hematology, hormone profiling, ELISA and PCR testing.", tagline: "Comprehensive Testing, Accurate Results, Fast Turnaround",
+          paragraphs: [
+            "The Wudassie Advanced Diagnostic Laboratory delivers a full spectrum of testing — chemistry, hematology, microbiology, hormone profiling, ELISA, and PCR — using internationally calibrated equipment and rigorous quality control.",
+            "Most routine results are available within hours, giving patients and physicians the fast, reliable data needed to guide treatment without delay."
+          ],
+          features: ["Full Chemistry & Hematology Panel", "Hormone & ELISA Profiling", "PCR Testing", "Results Within Hours"] },
+        am: { title: "ላቦራቶሪ", short: "ሁሉን አቀፍ ኬሚስትሪ፣ ሂማቶሎጂ፣ የሆርሞን ምርመራ፣ ኢላይዛ እና ፒሲአር ምርመራ።", tagline: "ሁሉን አቀፍ ምርመራ፣ ትክክለኛ ውጤት፣ ፈጣን አገልግሎት",
+          paragraphs: [
+            "የውዳሴ የላቀ የምርመራ ላቦራቶሪ ሙሉ የምርመራ አይነቶችን ያቀርባል — ኬሚስትሪ፣ ሂማቶሎጂ፣ ማይክሮባዮሎጂ፣ የሆርሞን ምርመራ፣ ኢላይዛ እና ፒሲአር — በአለም አቀፍ ደረጃ የተስተካከሉ መሳሪያዎችን እና ጥብቅ የጥራት ቁጥጥርን በመጠቀም።",
+            "አብዛኛዎቹ መደበኛ ውጤቶች በሰዓታት ውስጥ ይገኛሉ፤ ለታካሚዎች እና ለሐኪሞች ያለምንም መዘግየት ህክምናን ለመምራት የሚያስፈልገውን ፈጣንና አስተማማኝ መረጃ ይሰጣል።"
+          ],
+          features: ["ሙሉ ኬሚስትሪ እና ሂማቶሎጂ", "የሆርሞን እና ኢላይዛ ምርመራ", "ፒሲአር ምርመራ", "ውጤት በሰዓታት ውስጥ"] } },
+
+      mri: { number: 5, icon: 'fa-magnet',
+        en: { title: "MRI", short: "High-field MRI for detailed neuro, spinal and musculoskeletal scans with zero radiation.", tagline: "Crystal-Clear Detail, Zero Radiation",
+          paragraphs: [
+            "Our high-field MRI system produces exceptionally detailed images of the brain, spine, joints, and soft tissues without any ionizing radiation, making it the safest choice for complex neurological and musculoskeletal diagnosis.",
+            "Subspecialized radiologists interpret every scan, giving referring physicians the confidence to make precise treatment decisions for their patients."
+          ],
+          features: ["High-Field Magnetic Imaging", "Zero Ionizing Radiation", "Neuro & Musculoskeletal Studies", "Subspecialist Radiology Review"] },
+        am: { title: "ኤምአርአይ", short: "ያለ ጨረር ዝርዝር የነርቭ፣ የአከርካሪ እና የአጥንት ስካን የሚያደርግ ከፍተኛ-መስክ ኤምአርአይ።", tagline: "እጅግ ግልጽ ዝርዝር፣ ያለ ጨረር",
+          paragraphs: [
+            "ከፍተኛ-መስክ ያለው የኤምአርአይ ስርዓታችን ያለምንም አዮናይዚንግ ጨረር የአንጎልን፣ የአከርካሪን፣ የመገጣጠሚያዎችን እና ለስላሳ ቲሹዎችን እጅግ ዝርዝር ምስሎችን ያመነጫል፤ ይህም ውስብስብ ለሆኑ የነርቭ እና የአጥንት ምርመራዎች በጣም ደህንነቱ የተጠበቀ አማራጭ ያደርገዋል።",
+            "ልዩ ስፔሻሊስት ራዲዮሎጂስቶች እያንዳንዱን ስካን ይተረጉማሉ፤ ይህም ለሚያመለክቱ ሐኪሞች ለታካሚዎቻቸው ትክክለኛ የህክምና ውሳኔ ለማድረግ በራስ መተማመንን ይሰጣል።"
+          ],
+          features: ["ከፍተኛ-መስክ ማግኔቲክ ምስል", "ያለ አዮናይዚንግ ጨረር", "የነርቭ እና የአጥንት ጥናት", "የስፔሻሊስት ራዲዮሎጂ ግምገማ"] } },
+
+      radiography: { number: 6, icon: 'fa-x-ray',
+        en: { title: "Radiography", short: "High-resolution digital X-ray for fast orthopedic, chest and specialized contrast exams.", tagline: "Ethiopia's First Digital X-Ray, Still Setting the Standard",
+          paragraphs: [
+            "As the first center in Ethiopia to introduce high-resolution digital radiography, Wudassie continues to deliver sharp, low-dose X-ray imaging for orthopedic, chest, abdominal, and specialized contrast examinations.",
+            "Digital capture means faster results, easy sharing with referring physicians, and the ability to enhance images for the clearest possible diagnostic view."
+          ],
+          features: ["High-Resolution Digital Capture", "Low-Dose Exposure", "Orthopedic & Chest Imaging", "Contrast Study Capability"] },
+        am: { title: "ራዲዮግራፊ", short: "ለፈጣን የአጥንት፣ የደረት እና ልዩ ንፅፅር ምርመራዎች ከፍተኛ ጥራት ያለው ዲጂታል ኤክስሬይ።", tagline: "የኢትዮጵያ የመጀመሪያው ዲጂታል ኤክስሬይ፣ አሁንም ደረጃውን የሚያስቀምጥ",
+          paragraphs: [
+            "በኢትዮጵያ ከፍተኛ ጥራት ያለው ዲጂታል ራዲዮግራፊን ለመጀመሪያ ጊዜ ያስተዋወቀ ተቋም እንደመሆናችን፣ ውዳሴ ለአጥንት፣ ለደረት፣ ለሆድ እና ለልዩ ንፅፅር ምርመራዎች ግልጽ እና ዝቅተኛ-መጠን ያለው የኤክስሬይ ምስል ማቅረቡን ቀጥሏል።",
+            "ዲጂታል ቀረጻ ማለት ፈጣን ውጤት፣ ከሚያመለክቱ ሐኪሞች ጋር ቀላል መጋራት እና ለግልጽ የምርመራ እይታ ምስሎችን የማሻሻል አቅም ማለት ነው።"
+          ],
+          features: ["ከፍተኛ ጥራት ዲጂታል ቀረጻ", "ዝቅተኛ-መጠን ጨረር", "የአጥንት እና ደረት ምስል", "የንፅፅር ጥናት አቅም"] } },
+
+      ultrasound: { number: 7, icon: 'fa-wave-square',
+        en: { title: "Ultrasonography", short: "Advanced 3D/4D and Doppler ultrasound for obstetric, abdominal, vascular and pelvic evaluation.", tagline: "Advanced 3D/4D Imaging for Every Stage of Life",
+          paragraphs: [
+            "From obstetric 3D/4D scans that let families see their baby's face before birth, to abdominal, vascular, thyroid, and pelvic Doppler studies, our ultrasound suite combines advanced technology with a gentle, patient-first approach.",
+            "Our sonographers take the time to explain every step, and clear printed images are provided so patients leave with answers — and often, treasured keepsakes."
+          ],
+          features: ["3D/4D Obstetric Imaging", "Doppler Vascular Studies", "Abdominal & Pelvic Scans", "Thyroid Ultrasound"] },
+        am: { title: "አልትራሳውንድ", short: "ለጽንስ፣ ለሆድ፣ ለደም ስር እና ለዳሌ ምርመራ የላቀ 3ል/4ል እና ዶፕለር አልትራሳውንድ።", tagline: "ለእያንዳንዱ የህይወት ደረጃ የላቀ 3ል/4ል ምስል",
+          paragraphs: [
+            "ቤተሰቦች ከመወለዱ በፊት የልጃቸውን ፊት እንዲያዩ ከሚያስችላቸው የጽንስ 3ል/4ል ስካን እስከ የሆድ፣ የደም ስር፣ የታይሮይድ እና የዳሌ ዶፕለር ጥናቶች ድረስ፣ የአልትራሳውንድ ክፍላችን የላቀ ቴክኖሎጂን ከገር እና ታካሚን ቅድሚያ ከሚሰጥ አካሄድ ጋር ያዋህዳል።",
+            "የሶኖግራፊ ባለሙያዎቻችን እያንዳንዱን ደረጃ ለማብራራት ጊዜ ይወስዳሉ፤ ግልጽ የታተሙ ምስሎችም ይቀርባሉ፤ ስለዚህ ታካሚዎች መልስ ይዘው ይወጣሉ — እና ብዙ ጊዜ የሚዘከሩ መታሰቢያዎችን።"
+          ],
+          features: ["3ል/4ል የጽንስ ምስል", "የዶፕለር የደም ስር ጥናት", "የሆድ እና ዳሌ ስካን", "የታይሮይድ አልትራሳውንድ"] } }
+    };
+  </script>
+
+  <!-- DATA: TRANSLATIONS -->
+  <script>
+    const translations = {
+      en: {
+        nav: { home: "Home", about: "About Us", services: "Services", gallery: "Gallery", testimonials: "Testimonials", contact: "Contact", getInTouch: "Get In Touch" },
+        brand: { tagline: "Diagnostic Center" },
+        topbar: { hotlineLabel: "24/7 Hotline & Emergency:", address: "MK Building, Churchill Road, Addis Ababa" },
+        serviceShort: { ambulance: "Ambulance Services", ctscan: "CT-Scan", endoscopy: "Endoscopy & Colonoscopy", laboratory: "Laboratory", mri: "MRI Scanning", radiography: "Digital Radiography", ultrasound: "Ultrasonography (3D/4D)" },
+        hero: { badge: "24/7 Service • Pagumen Free Examination Initiative", title1: "Wudassie Diagnostic Center", title2: "Uncompromising Image Quality", subtitle: "Working For You. Pioneering high-precision diagnostic imaging and laboratory services in Addis Ababa, Ethiopia since 2008.", btnServices: "View 7 Diagnostic Services", btnAbout: "Our Mission & History" },
+        portal: { tabPortal: "Patient Portal", tabBook: "Book Scan", sampleLabel: "Sample / Order ID", phoneLabel: "Phone Number", retrieveBtn: "Retrieve Test Results", nameLabel: "Full Name", serviceLabel: "Select Service", serviceDefault: "-- Choose Diagnostic Service --", bookBtn: "Request Appointment", searching: "Searching..." },
+        about: {
+          badgeEstablished: "Established 2008 in Addis Ababa, Ethiopia", headerTitle: "About Wudassie Diagnostic Center", whoWeAreTitle: "Who We Are",
+          p1: "Founded in 2008 by Dawit Hailu and his family, Wudassie Diagnostic Center (WDC) is one of the first diagnostic centers with MRI, CT scan, Digital X-ray, Ultrasound, EKG, and Ambulance service in Ethiopia.",
+          p2: "WDC's passion for quality, cost-effectiveness, and exceptional patient care were contagious and continue to be our core principles of operation. WDC is dedicated to providing the community in and outside Addis Ababa with the finest imaging services by a local team of specialized physicians and associates. This ensures that our patients receive care from a team who works closely with the local healthcare community, including the referring physicians.",
+          p3: "In addition, the WDC team is connected with other physicians and professionals across the country via WDC's network, giving the Center the ability to share best practices and consult with other experts on special cases.",
+          coreOpsTitle: "Core Operations", op1Sub: "Continuous Service Operation", op2Title: "13th Month (Pagumen)", op2Sub: "Annual Free Diagnostic Examination", op3Title: "7 Languages", op3Sub: "Multi-lingual Staff Communication",
+          missionTitle: "Mission", missionText: "WDC provides state-of-the-art diagnostic imaging to physicians, technologists, and clients by blending advanced technology, extensive clinical expertise, and superior provider and patient care.",
+          visionTitle: "Vision", visionText: "To be the leading state-of-the-art diagnostic imaging service provider with highest quality radiology reporting and ancillary services taking the best interest of patients and their referring physicians.",
+          valuesTitle: "Core Values", value1: "Quality", value2: "Care", value3: "Corporate Social Responsibility",
+          objectivesTitle: "Objectives", obj1: "Better quality diagnostic image & reading 24 hours a day, 7 days a week.", obj2: "Better outcomes assisting physicians in patient diagnosis.", obj3: "Better value for money and invested resources."
+        },
+        services: { badge: "Medical Capabilities", title: "Our 7 Diagnostic Services", subtitle: "High-precision medical imaging & clinical diagnostic services.", learnMore: "Learn More" },
+        serviceDetail: { back: "Back to All Services", bookBtn: "Book This Service", askBtn: "Ask a Question", whyChoose: "Why Choose Wudassie", serviceLabel: "Service" },
+        gallery: { badge: "Center Tour", title: "Facility & Equipment Gallery", tile1Title: "MRI Scanning Suite", tile1Sub: "Magnetic Resonance Suite", tile2Title: "Digital Radiography Unit", tile2Sub: "High-Precision X-Ray", tile3Title: "Ambulance Emergency Vehicle", tile3Sub: "24/7 Transport Service" },
+        testimonials: { badge: "Patient & Doctor Feedback", title: "Patient Testimonials", subtitle: "Authentic reviews from doctors and patients served by Wudassie Diagnostic Center." },
+        contact: {
+          badge: "Get In Touch", title: "Contact Wudassie Diagnostic Center", subtitle: "Reach out for appointments, ambulance dispatch, or diagnostic result support.",
+          hotlineLabel: "24/7 Emergency & Appointments Hotline", altLine: "Alternative Line:", emailLabel: "Email Enquiries", addressLabel: "Main Facility Address",
+          formTitle: "Send Us a Direct Message", nameLabel: "Your Full Name", emailPhoneLabel: "Email / Phone Number", emailPhonePlaceholder: "Phone or email...", messageLabel: "Message / Inquiry", messagePlaceholder: "Write your message here...", submitBtn: "Submit Message",
+          mapBadge: "Main Branch Location", mapTitle: "Visit Our Main Facility", mapSubtitle: "Conveniently situated in the center of Addis Ababa.", addressBlockLabel: "Address", hotlineBlockLabel: "24/7 Hotline & Emergency", hoursLabel: "Operating Hours", hoursValue: "24 Hours / 7 Days / 365 Days", openMaps: "Open in Google Maps"
+        },
+        footer: { copyright: "© 2026 Wudassie Diagnostic Center. All rights reserved.", tagline: "Working For You — Uncompromising Image Quality & Patient Care." },
+        alerts: { resultFound: "Result Found! PDF Ready for Download.", invalidId: "Invalid ID format. Must start with WUD-.", appointmentRequested: "Appointment requested for {name}! We will call you shortly.", messageSent: "Message sent successfully!" }
+      },
+      am: {
+        nav: { home: "መነሻ", about: "ስለ እኛ", services: "አገልግሎቶች", gallery: "ማዕከለ-ስዕላት", testimonials: "የደንበኞች አስተያየት", contact: "አግኙን", getInTouch: "ያግኙን" },
+        brand: { tagline: "የምርመራ ማዕከል" },
+        topbar: { hotlineLabel: "24/7 የስልክ መስመር እና ድንገተኛ አደጋ፡", address: "ኤም.ኬ ህንፃ፣ ቸርችል ጎዳና፣ አዲስ አበባ" },
+        serviceShort: { ambulance: "የአምቡላንስ አገልግሎት", ctscan: "ሲቲ ስካን", endoscopy: "ኢንዶስኮፒ እና ኮሎኖስኮፒ", laboratory: "ላቦራቶሪ", mri: "ኤምአርአይ", radiography: "ራዲዮግራፊ (ዲጂታል ኤክስሬይ)", ultrasound: "አልትራሳውንድ (3ል/4ል)" },
+        hero: { badge: "24/7 አገልግሎት • የጳጉሜ ነጻ ምርመራ ውጥን", title1: "ውዳሴ የምርመራ ማዕከል", title2: "ያልተደራደረ የምስል ጥራት", subtitle: "ለእርስዎ እንሰራለን። ከ2008 ጀምሮ በአዲስ አበባ፣ ኢትዮጵያ ከፍተኛ ትክክለኛነት ያለው የምስል ምርመራ እና የላቦራቶሪ አገልግሎት በማቅረብ ቀዳሚ ነን።", btnServices: "7ቱን የምርመራ አገልግሎቶች ይመልከቱ", btnAbout: "ተልእኳችን እና ታሪካችን" },
+        portal: { tabPortal: "የታካሚ መግቢያ", tabBook: "ቀጠሮ ይያዙ", sampleLabel: "የናሙና / የትዕዛዝ መለያ", phoneLabel: "ስልክ ቁጥር", retrieveBtn: "የምርመራ ውጤት ያግኙ", nameLabel: "ሙሉ ስም", serviceLabel: "አገልግሎት ይምረጡ", serviceDefault: "-- የምርመራ አገልግሎት ይምረጡ --", bookBtn: "ቀጠሮ ይጠይቁ", searching: "በመፈለግ ላይ..." },
+        about: {
+          badgeEstablished: "በ2008 ዓ.ም በአዲስ አበባ፣ ኢትዮጵያ ተመሠረተ", headerTitle: "ስለ ውዳሴ የምርመራ ማዕከል", whoWeAreTitle: "እኛ ማን ነን",
+          p1: "በ2008 ዓ.ም በዳዊት ኃይሉ እና በቤተሰቡ የተመሰረተው ውዳሴ የምርመራ ማዕከል (WDC)፣ በኢትዮጵያ ኤምአርአይ፣ ሲቲ ስካን፣ ዲጂታል ኤክስሬይ፣ አልትራሳውንድ፣ ኢኬጂ እና የአምቡላንስ አገልግሎት ካላቸው የመጀመሪያዎቹ የምርመራ ማዕከላት አንዱ ነው።",
+          p2: "የWDC ለጥራት፣ ለወጪ ቆጣቢነት እና ለላቀ የታካሚ እንክብካቤ ያለው ፍቅር ተላላፊ ነበር እና አሁንም የስራችን ዋና መርሆች ናቸው። WDC በአዲስ አበባ ውስጥ እና ውጭ ላለው ማህበረሰብ በልዩ ልዩ ባለሙያ ሐኪሞች እና ተባባሪዎች ምርጥ የምስል አገልግሎቶችን ለማቅረብ ቁርጠኛ ነው። ይህም ታካሚዎቻችን አመልካች ሐኪሞችን ጨምሮ ከአካባቢው የጤና ማህበረሰብ ጋር በቅርበት ከሚሰራ ቡድን እንክብካቤ እንዲያገኙ ያረጋግጣል።",
+          p3: "በተጨማሪም የWDC ቡድን በአገሪቱ ውስጥ ካሉ ሌሎች ሐኪሞች እና ባለሙያዎች ጋር በWDC አውታረ መረብ በኩል የተገናኘ ሲሆን፣ ይህም ማዕከሉ ምርጥ ተሞክሮዎችን እንዲያካፍልና በልዩ ጉዳዮች ላይ ከሌሎች ባለሙያዎች ጋር እንዲመካከር ያስችለዋል።",
+          coreOpsTitle: "ዋና የስራ እንቅስቃሴዎች", op1Sub: "ቀጣይነት ያለው የአገልግሎት ስራ", op2Title: "13ኛው ወር (ጳጉሜ)", op2Sub: "ዓመታዊ ነጻ የምርመራ አገልግሎት", op3Title: "7 ቋንቋዎች", op3Sub: "የብዙ ቋንቋ ሰራተኞች ግንኙነት",
+          missionTitle: "ተልእኮ", missionText: "WDC ለሐኪሞች፣ ለቴክኖሎጂስቶች እና ለደንበኞች የላቀ ቴክኖሎጂን፣ ሰፊ የክሊኒካል ልምድን እና የላቀ የአቅራቢ እና የታካሚ እንክብካቤን በማዋሃድ ዘመናዊ የምርመራ ምስል አገልግሎት ይሰጣል።",
+          visionTitle: "ራዕይ", visionText: "የታካሚዎችን እና አመልካች ሐኪሞቻቸውን ጥቅም ግምት ውስጥ በማስገባት ከፍተኛ ጥራት ያለው የራዲዮሎጂ ሪፖርት እና ተጓዳኝ አገልግሎቶችን የሚሰጥ ግንባር ቀደም ዘመናዊ የምርመራ ምስል አገልግሎት ሰጪ ለመሆን።",
+          valuesTitle: "መሰረታዊ እሴቶች", value1: "ጥራት", value2: "እንክብካቤ", value3: "የድርጅት ማህበራዊ ኃላፊነት",
+          objectivesTitle: "ዓላማዎች", obj1: "የተሻለ ጥራት ያለው የምርመራ ምስል እና ንባብ በቀን 24 ሰዓት፣ በሳምንት 7 ቀን።", obj2: "ሐኪሞችን በታካሚ ምርመራ በመርዳት የተሻለ ውጤት ማምጣት።", obj3: "ለገንዘብ እና ለተዋለ ሀብት የተሻለ ዋጋ።"
+        },
+        services: { badge: "የህክምና አቅሞች", title: "7ቱ የምርመራ አገልግሎቶቻችን", subtitle: "ከፍተኛ ትክክለኛነት ያለው የህክምና ምስል እና ክሊኒካዊ የምርመራ አገልግሎቶች።", learnMore: "ተጨማሪ ይመልከቱ" },
+        serviceDetail: { back: "ወደ ሁሉም አገልግሎቶች ተመለስ", bookBtn: "ይህን አገልግሎት ይያዙ", askBtn: "ጥያቄ ይጠይቁ", whyChoose: "ለምን ውዳሴን ይምረጡ", serviceLabel: "አገልግሎት" },
+        gallery: { badge: "የማዕከሉ ጉብኝት", title: "የተቋም እና የመሳሪያ ማዕከለ-ስዕላት", tile1Title: "የኤምአርአይ ስካን ክፍል", tile1Sub: "የማግኔቲክ ሬዞናንስ ክፍል", tile2Title: "የዲጂታል ራዲዮግራፊ ክፍል", tile2Sub: "ከፍተኛ ትክክለኛነት ያለው ኤክስሬይ", tile3Title: "የአምቡላንስ የአደጋ ጊዜ ተሽከርካሪ", tile3Sub: "24/7 የመጓጓዣ አገልግሎት" },
+        testimonials: { badge: "የታካሚ እና የሐኪም አስተያየት", title: "የታካሚ ምስክርነቶች", subtitle: "በውዳሴ የምርመራ ማዕከል አገልግሎት ካገኙ ሐኪሞች እና ታካሚዎች የተሰጡ ትክክለኛ አስተያየቶች።" },
+        contact: {
+          badge: "ያግኙን", title: "ውዳሴ የምርመራ ማዕከልን ያግኙ", subtitle: "ለቀጠሮ፣ ለአምቡላንስ መላኪያ ወይም ለምርመራ ውጤት ድጋፍ ያግኙን።",
+          hotlineLabel: "24/7 የአደጋ ጊዜ እና የቀጠሮ ስልክ መስመር", altLine: "አማራጭ መስመር፡", emailLabel: "የኢሜይል ጥያቄዎች", addressLabel: "ዋና የተቋም አድራሻ",
+          formTitle: "ቀጥተኛ መልእክት ይላኩልን", nameLabel: "ሙሉ ስምዎ", emailPhoneLabel: "ኢሜይል / ስልክ ቁጥር", emailPhonePlaceholder: "ስልክ ወይም ኢሜይል...", messageLabel: "መልእክት / ጥያቄ", messagePlaceholder: "መልእክትዎን እዚህ ይጻፉ...", submitBtn: "መልእክት ይላኩ",
+          mapBadge: "የዋና ቅርንጫፍ አድራሻ", mapTitle: "ዋና ተቋማችንን ይጎብኙ", mapSubtitle: "በአዲስ አበባ መሃል በምቹ ሁኔታ ይገኛል።", addressBlockLabel: "አድራሻ", hotlineBlockLabel: "24/7 ስልክ መስመር እና ድንገተኛ አደጋ", hoursLabel: "የስራ ሰዓታት", hoursValue: "24 ሰዓት / 7 ቀን / 365 ቀን", openMaps: "በጉግል ካርታ ይክፈቱ"
+        },
+        footer: { copyright: "© 2026 ውዳሴ የምርመራ ማዕከል። መብቱ በህግ የተጠበቀ ነው።", tagline: "ለእርስዎ እንሰራለን — ያልተደራደረ የምስል ጥራት እና የታካሚ እንክብካቤ።" },
+        alerts: { resultFound: "ውጤት ተገኝቷል! ፒዲኤፍ ለማውረድ ዝግጁ ነው።", invalidId: "ልክ ያልሆነ መለያ ቅርጸት። በ WUD- መጀመር አለበት።", appointmentRequested: "ለ{name} ቀጠሮ ተጠይቋል! በቅርቡ እንደውልልዎታለን።", messageSent: "መልእክት በተሳካ ሁኔታ ተልኳል!" }
+      }
+    };
+  </script>
+
+  <!-- ROUTING, I18N, AND INTERACTION SCRIPTS -->
+  <script>
+    let currentLang = 'en';
+    let currentServiceId = null;
+
+    function getTranslation(key, lang) {
+      return key.split('.').reduce((obj, k) => (obj ? obj[k] : undefined), translations[lang]);
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const val = getTranslation(el.getAttribute('data-i18n'), lang);
+        if (val !== undefined) el.textContent = val;
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const val = getTranslation(el.getAttribute('data-i18n-placeholder'), lang);
+        if (val !== undefined) el.placeholder = val;
+      });
+      renderServicesGrid();
+      if (currentServiceId) renderServiceDetail();
+    }
+
+    function switchLanguage(lang) {
+      const enBtn = document.getElementById('lang-en');
+      const amBtn = document.getElementById('lang-am');
+      if (lang === 'am') {
+        amBtn.classList.add('font-black', 'text-white');
+        enBtn.classList.remove('font-black', 'text-white');
+      } else {
+        enBtn.classList.add('font-black', 'text-white');
+        amBtn.classList.remove('font-black', 'text-white');
+      }
+      applyLanguage(lang);
+    }
+
+    function renderServicesGrid() {
+      const grid = document.getElementById('services-grid');
+      if (!grid) return;
+      grid.innerHTML = Object.keys(serviceData).map(id => {
+        const data = serviceData[id];
+        const t = data[currentLang];
+        return `
+        <button type="button" onclick="openService('${id}')" id="service-${id}" class="reveal glow-card bg-white p-6 rounded-2xl border border-gray-200 shadow-sm transition-all text-left w-full group">
+          <div class="relative z-10 w-10 h-10 rounded-lg bg-red-100 text-brand flex items-center justify-center font-bold mb-4 group-hover:scale-110 transition-transform">
+            <i class="fa-solid ${data.icon} text-lg"></i>
+          </div>
+          <h3 class="relative z-10 text-lg font-bold text-gray-900 mb-2">${data.number}. ${t.title}</h3>
+          <p class="relative z-10 text-xs text-gray-600 leading-relaxed mb-4">${t.short}</p>
+          <span class="relative z-10 inline-flex items-center gap-1.5 text-xs font-black text-brand">
+            ${translations[currentLang].services.learnMore} <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+          </span>
+        </button>`;
+      }).join('');
+      initReveal();
+    }
+
+    function openService(id) {
+      currentServiceId = id;
+      renderServiceDetail();
+      navigateTo('service-detail');
+    }
+
+    function renderServiceDetail() {
+      if (!currentServiceId) return;
+      const data = serviceData[currentServiceId];
+      const t = data[currentLang];
+      document.getElementById('service-detail-badge').textContent = translations[currentLang].serviceDetail.serviceLabel + ' ' + data.number + ' / 7';
+      document.getElementById('service-detail-icon').className = 'fa-solid ' + data.icon + ' relative z-10';
+      document.getElementById('service-detail-title').textContent = t.title;
+      document.getElementById('service-detail-tagline').textContent = t.tagline;
+      document.getElementById('service-detail-paragraphs').innerHTML = t.paragraphs.map(p => `<p>${p}</p>`).join('');
+      document.getElementById('service-detail-features').innerHTML = t.features.map(f => `
+        <li class="flex items-center gap-3 liquid-glass rounded-xl px-4 py-3 text-sm font-bold text-gray-800">
+          <span class="relative z-10 w-7 h-7 rounded-full bg-brand text-white flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-check"></i></span>
+          <span class="relative z-10">${f}</span>
+        </li>`).join('');
+    }
+
     function navigateTo(pageId) {
       const views = document.querySelectorAll('.page-view');
       views.forEach(view => view.classList.add('hidden'));
@@ -1110,29 +1108,19 @@
 
       const navLinks = document.querySelectorAll('.nav-link');
       navLinks.forEach(link => {
-        link.classList.remove('text-brand', 'font-black');
+        link.classList.remove('text-brand', 'font-black', 'active');
         link.classList.add('text-gray-700');
       });
 
-      const activeNav = document.getElementById('nav-' + pageId);
+      const navTargetId = pageId === 'service-detail' ? 'services' : pageId;
+      const activeNav = document.getElementById('nav-' + navTargetId);
       if (activeNav) {
-        activeNav.classList.add('text-brand', 'font-black');
+        activeNav.classList.add('text-brand', 'font-black', 'active');
         activeNav.classList.remove('text-gray-700');
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
       initReveal();
-    }
-
-    function scrollService(serviceId) {
-      setTimeout(() => {
-        const el = document.getElementById('service-' + serviceId);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          el.classList.add('ring-2', 'ring-brand');
-          setTimeout(() => el.classList.remove('ring-2', 'ring-brand'), 2000);
-        }
-      }, 100);
     }
 
     function toggleMobileMenu() {
@@ -1174,22 +1162,22 @@
       const alertBox = document.getElementById('status-alert');
 
       btn.disabled = true;
-      btn.querySelector('span').innerText = 'Searching...';
+      btn.querySelector('span').innerText = translations[currentLang].portal.searching;
       btn.querySelector('i').className = 'fa-solid fa-spinner animate-spin mr-2 text-xs';
 
       setTimeout(() => {
         btn.disabled = false;
-        btn.querySelector('span').innerText = 'Retrieve Test Results';
+        btn.querySelector('span').innerText = translations[currentLang].portal.retrieveBtn;
         btn.querySelector('i').className = 'fa-solid fa-magnifying-glass mr-2 text-xs';
 
         alertBox.classList.remove('hidden', 'bg-red-50', 'text-red-700', 'bg-green-50', 'text-green-700');
 
         if (sampleId.toLowerCase().startsWith('wud-')) {
           alertBox.classList.add('bg-green-50', 'text-green-700');
-          alertBox.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> Result Found! PDF Ready for Download.';
+          alertBox.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> ' + translations[currentLang].alerts.resultFound;
         } else {
           alertBox.classList.add('bg-red-50', 'text-red-700');
-          alertBox.innerHTML = '<i class="fa-solid fa-circle-exclamation mr-1"></i> Invalid ID format. Must start with "WUD-".';
+          alertBox.innerHTML = '<i class="fa-solid fa-circle-exclamation mr-1"></i> ' + translations[currentLang].alerts.invalidId;
         }
       }, 1000);
     }
@@ -1201,7 +1189,7 @@
 
       alertBox.classList.remove('hidden', 'bg-red-50', 'text-red-700');
       alertBox.classList.add('bg-green-50', 'text-green-700');
-      alertBox.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> Appointment requested for ${name}! We will call you shortly.`;
+      alertBox.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> ' + translations[currentLang].alerts.appointmentRequested.replace('{name}', name);
       document.getElementById('book-form').reset();
     }
 
@@ -1210,31 +1198,15 @@
       const alertBox = document.getElementById('contact-alert');
       alertBox.classList.remove('hidden', 'bg-green-50', 'text-green-700');
       alertBox.classList.add('bg-green-50', 'text-green-700');
-      alertBox.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> Message sent successfully!';
+      alertBox.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> ' + translations[currentLang].alerts.messageSent;
       e.target.reset();
-    }
-
-    function switchLanguage(lang) {
-      const enBtn = document.getElementById('lang-en');
-      const amBtn = document.getElementById('lang-am');
-
-      if (lang === 'am') {
-        amBtn.classList.add('font-black', 'text-white');
-        enBtn.classList.remove('font-black', 'text-white');
-      } else {
-        enBtn.classList.add('font-black', 'text-white');
-        amBtn.classList.remove('font-black', 'text-white');
-      }
     }
 
     /* ---------- Navbar elevation on scroll ---------- */
     const mainNav = document.getElementById('main-nav');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 12) {
-        mainNav.classList.add('scrolled');
-      } else {
-        mainNav.classList.remove('scrolled');
-      }
+      if (window.scrollY > 12) mainNav.classList.add('scrolled');
+      else mainNav.classList.remove('scrolled');
     });
 
     /* ---------- Scroll-reveal via IntersectionObserver ---------- */
@@ -1269,7 +1241,10 @@
       setTimeout(() => circle.remove(), 700);
     });
 
-    document.addEventListener('DOMContentLoaded', initReveal);
+    document.addEventListener('DOMContentLoaded', () => {
+      applyLanguage('en');
+      initReveal();
+    });
   </script>
 </body>
 </html>
