@@ -494,10 +494,23 @@
 
       <div class="grid lg:grid-cols-12 gap-10 items-center">
         <div class="lg:col-span-5 flex justify-center">
-          <div class="service-orb">
-            <span class="orb-ring ring-1"></span>
-            <span class="orb-ring ring-2"></span>
-            <span class="orb-core liquid-glass"><i id="service-detail-icon" class="fa-solid fa-truck-medical relative z-10"></i></span>
+          <div class="relative w-full max-w-sm">
+            <div class="hud-frame rounded-3xl overflow-hidden shadow-2xl border border-white/40 relative h-72 sm:h-80 bg-gray-100">
+              <span class="hud-corner tl"></span><span class="hud-corner tr"></span><span class="hud-corner bl"></span><span class="hud-corner br"></span>
+              <img id="service-detail-photo" src="" alt="" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'; document.getElementById('service-detail-fallback').style.display='flex';">
+              <div id="service-detail-fallback" class="absolute inset-0 hidden items-center justify-center bg-gradient-to-br from-brand-surface to-white">
+                <div class="service-orb">
+                  <span class="orb-ring ring-1"></span>
+                  <span class="orb-ring ring-2"></span>
+                  <span class="orb-core liquid-glass"><i id="service-detail-icon-fallback" class="fa-solid fa-truck-medical relative z-10"></i></span>
+                </div>
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent pointer-events-none"></div>
+            </div>
+            <p class="text-center text-[10px] text-gray-400 mt-2">Photo: Wikimedia Commons</p>
+            <div class="absolute -bottom-3 -right-3 w-16 h-16 rounded-2xl liquid-glass flex items-center justify-center shadow-xl">
+              <i id="service-detail-icon" class="fa-solid fa-truck-medical relative z-10 text-2xl text-brand"></i>
+            </div>
           </div>
         </div>
         <div class="lg:col-span-7 space-y-4">
@@ -537,6 +550,7 @@
         <div class="reveal gallery-frame hud-frame rounded-2xl h-64 relative overflow-hidden shadow-lg">
           <span class="hud-corner tl"></span><span class="hud-corner tr"></span><span class="hud-corner bl"></span><span class="hud-corner br"></span>
           <div class="gallery-tile absolute inset-0 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900"></div>
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Siemens_Magnetom_Aera_MRI_scanner.jpg?width=800" alt="MRI Scanning Suite" class="gallery-tile absolute inset-0 w-full h-full object-cover" onerror="this.remove()">
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
           <div class="absolute bottom-0 p-6">
             <span class="relative text-white font-bold text-lg block" data-i18n="gallery.tile1Title">MRI Scanning Suite</span>
@@ -546,6 +560,7 @@
         <div class="reveal gallery-frame hud-frame rounded-2xl h-64 relative overflow-hidden shadow-lg">
           <span class="hud-corner tl"></span><span class="hud-corner tr"></span><span class="hud-corner bl"></span><span class="hud-corner br"></span>
           <div class="gallery-tile absolute inset-0 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900"></div>
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hospital_Radiology_Room_Philips_DigitalDiagnost_Digital_Radiography_System.jpg?width=800" alt="Digital Radiography Unit" class="gallery-tile absolute inset-0 w-full h-full object-cover" onerror="this.remove()">
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
           <div class="absolute bottom-0 p-6">
             <span class="relative text-white font-bold text-lg block" data-i18n="gallery.tile2Title">Digital Radiography Unit</span>
@@ -555,6 +570,7 @@
         <div class="reveal gallery-frame hud-frame rounded-2xl h-64 relative overflow-hidden shadow-lg">
           <span class="hud-corner tl"></span><span class="hud-corner tr"></span><span class="hud-corner bl"></span><span class="hud-corner br"></span>
           <div class="gallery-tile absolute inset-0 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900"></div>
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes_E-Class_Ambulance_%2843254780495%29.jpg?width=800" alt="Ambulance Emergency Vehicle" class="gallery-tile absolute inset-0 w-full h-full object-cover" onerror="this.remove()">
           <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
           <div class="absolute bottom-0 p-6">
             <span class="relative text-white font-bold text-lg block" data-i18n="gallery.tile3Title">Ambulance Emergency Vehicle</span>
@@ -846,7 +862,7 @@
   <!-- DATA: SERVICES -->
   <script>
     const serviceData = {
-      ambulance: { number: 1, icon: 'fa-truck-medical',
+      ambulance: { number: 1, icon: 'fa-truck-medical', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes_E-Class_Ambulance_%2843254780495%29.jpg?width=900',
         en: { title: "Ambulance Services", short: "24/7 patient transport and emergency transfer with trained medical personnel for rapid, safe transit.", tagline: "Rapid Response, Anywhere in Addis Ababa",
           paragraphs: [
             "Wudassie's fleet of fully-equipped ambulances operates around the clock, staffed by trained paramedics ready to respond to emergencies and scheduled patient transfers alike. Every vehicle carries essential life-support equipment, oxygen supply, and direct radio contact with our diagnostic teams.",
@@ -860,7 +876,7 @@
           ],
           features: ["24/7 የአደጋ ጊዜ መላኪያ", "የሰለጠነ የድንገተኛ ህክምና ቡድን", "የላቀ የህይወት ማቆያ መሳሪያ", "ቀጥተኛ የሆስፒታል ቅንጅት"] } },
 
-      ctscan: { number: 2, icon: 'fa-circle-radiation',
+      ctscan: { number: 2, icon: 'fa-circle-radiation', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/CT_Scanner_-_GE_Optima_Series.jpg?width=900',
         en: { title: "CT-Scan", short: "High-speed multi-slice CT for rapid trauma, chest, abdominal and vascular imaging with low radiation.", tagline: "Precision Cross-Sectional Imaging, Fast Results",
           paragraphs: [
             "Our high-speed multi-slice CT scanner captures detailed cross-sectional images of the body in seconds, giving physicians the clarity they need for rapid trauma assessment, cancer screening, and vascular studies. Low-dose protocols keep radiation exposure to a minimum without compromising image quality.",
@@ -874,7 +890,7 @@
           ],
           features: ["ባለብዙ-ንብርብር ፈጣን ስካን", "ዝቅተኛ-ጨረር ፕሮቶኮል", "በተመሳሳይ ቀን የራዲዮሎጂስት ሪፖርት", "የአደጋ እና የደም ስር ምስል"] } },
 
-      endoscopy: { number: 3, icon: 'fa-stethoscope',
+      endoscopy: { number: 3, icon: 'fa-stethoscope', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Endoscopy_training.jpg?width=900',
         en: { title: "Endoscopy and Colonoscopy", short: "Direct video visualization of the digestive tract to detect ulcers, bleeding, and mucosal lesions.", tagline: "Clear Answers for Digestive Health",
           paragraphs: [
             "Using high-definition video endoscopy, our specialists directly visualize the esophagus, stomach, and colon to detect ulcers, bleeding, polyps, and mucosal abnormalities with precision. Procedures are performed under careful sedation protocols for patient comfort.",
@@ -888,7 +904,7 @@
           ],
           features: ["ከፍተኛ ጥራት ቪዲዮ ኢንዶስኮፒ", "ለታካሚ ምቾት ማደንዘዣ", "ፖሊፕ እና ቁስለት ማግኘት", "የጨጓራ ስፔሻሊስት ቡድን"] } },
 
-      laboratory: { number: 4, icon: 'fa-vial',
+      laboratory: { number: 4, icon: 'fa-vial', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Laboratory_equipment.jpg?width=900',
         en: { title: "Laboratory", short: "Comprehensive chemistry, hematology, hormone profiling, ELISA and PCR testing.", tagline: "Comprehensive Testing, Accurate Results, Fast Turnaround",
           paragraphs: [
             "The Wudassie Advanced Diagnostic Laboratory delivers a full spectrum of testing — chemistry, hematology, microbiology, hormone profiling, ELISA, and PCR — using internationally calibrated equipment and rigorous quality control.",
@@ -902,7 +918,7 @@
           ],
           features: ["ሙሉ ኬሚስትሪ እና ሂማቶሎጂ", "የሆርሞን እና ኢላይዛ ምርመራ", "ፒሲአር ምርመራ", "ውጤት በሰዓታት ውስጥ"] } },
 
-      mri: { number: 5, icon: 'fa-magnet',
+      mri: { number: 5, icon: 'fa-magnet', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Siemens_Magnetom_Aera_MRI_scanner.jpg?width=900',
         en: { title: "MRI", short: "High-field MRI for detailed neuro, spinal and musculoskeletal scans with zero radiation.", tagline: "Crystal-Clear Detail, Zero Radiation",
           paragraphs: [
             "Our high-field MRI system produces exceptionally detailed images of the brain, spine, joints, and soft tissues without any ionizing radiation, making it the safest choice for complex neurological and musculoskeletal diagnosis.",
@@ -916,7 +932,7 @@
           ],
           features: ["ከፍተኛ-መስክ ማግኔቲክ ምስል", "ያለ አዮናይዚንግ ጨረር", "የነርቭ እና የአጥንት ጥናት", "የስፔሻሊስት ራዲዮሎጂ ግምገማ"] } },
 
-      radiography: { number: 6, icon: 'fa-x-ray',
+      radiography: { number: 6, icon: 'fa-x-ray', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/Hospital_Radiology_Room_Philips_DigitalDiagnost_Digital_Radiography_System.jpg?width=900',
         en: { title: "Radiography", short: "High-resolution digital X-ray for fast orthopedic, chest and specialized contrast exams.", tagline: "Ethiopia's First Digital X-Ray, Still Setting the Standard",
           paragraphs: [
             "As the first center in Ethiopia to introduce high-resolution digital radiography, Wudassie continues to deliver sharp, low-dose X-ray imaging for orthopedic, chest, abdominal, and specialized contrast examinations.",
@@ -930,7 +946,7 @@
           ],
           features: ["ከፍተኛ ጥራት ዲጂታል ቀረጻ", "ዝቅተኛ-መጠን ጨረር", "የአጥንት እና ደረት ምስል", "የንፅፅር ጥናት አቅም"] } },
 
-      ultrasound: { number: 7, icon: 'fa-wave-square',
+      ultrasound: { number: 7, icon: 'fa-wave-square', photo: 'https://commons.wikimedia.org/wiki/Special:FilePath/A_modern_medical_ultrasound_scanner.jpg?width=900',
         en: { title: "Ultrasonography", short: "Advanced 3D/4D and Doppler ultrasound for obstetric, abdominal, vascular and pelvic evaluation.", tagline: "Advanced 3D/4D Imaging for Every Stage of Life",
           paragraphs: [
             "From obstetric 3D/4D scans that let families see their baby's face before birth, to abdominal, vascular, thyroid, and pelvic Doppler studies, our ultrasound suite combines advanced technology with a gentle, patient-first approach.",
@@ -1083,7 +1099,14 @@
       const data = serviceData[currentServiceId];
       const t = data[currentLang];
       document.getElementById('service-detail-badge').textContent = translations[currentLang].serviceDetail.serviceLabel + ' ' + data.number + ' / 7';
-      document.getElementById('service-detail-icon').className = 'fa-solid ' + data.icon + ' relative z-10';
+      document.getElementById('service-detail-icon').className = 'fa-solid ' + data.icon + ' relative z-10 text-2xl text-brand';
+      document.getElementById('service-detail-icon-fallback').className = 'fa-solid ' + data.icon + ' relative z-10';
+      const photoEl = document.getElementById('service-detail-photo');
+      const fallbackEl = document.getElementById('service-detail-fallback');
+      fallbackEl.style.display = 'none';
+      photoEl.style.display = 'block';
+      photoEl.src = data.photo;
+      photoEl.alt = t.title;
       document.getElementById('service-detail-title').textContent = t.title;
       document.getElementById('service-detail-tagline').textContent = t.tagline;
       document.getElementById('service-detail-paragraphs').innerHTML = t.paragraphs.map(p => `<p>${p}</p>`).join('');
